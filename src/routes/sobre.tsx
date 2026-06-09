@@ -86,9 +86,9 @@ function SobrePage() {
             por estado base, no contexto da neuropsicologia aplicada.
           </p>
           <p>
-            [PLACEHOLDER] Um parágrafo sobre a intenção editorial do projeto: uma
-            casa para cursos, materiais e protocolos pensados como objetos de
-            leitura, não como produtos descartáveis.
+            [PLACEHOLDER] Um parágrafo sobre a intenção editorial do projeto:
+            uma casa para cursos ao vivo pensados com rigor, clareza e tempo de
+            estudo, não como conteúdos descartáveis.
           </p>
           <p>
             [PLACEHOLDER] Uma linha final sobre quem é o leitor implícito desta
@@ -109,7 +109,7 @@ function SobrePage() {
           to="/sincronos"
           className="inline-flex items-center gap-3 bg-accent text-accent-foreground px-8 py-4 text-sm tracking-wide hover:bg-accent/90 transition-colors"
         >
-          Conhecer os cursos
+          Ver o curso ao vivo
           <span aria-hidden>→</span>
         </Link>
       </Container>

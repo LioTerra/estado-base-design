@@ -2,9 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Container } from "./container";
 
 const nav = [
-  { to: "/sincronos", label: "Síncronos" },
-  { to: "/assincronos", label: "Assíncronos" },
-  { to: "/materiais", label: "Materiais" },
+  { to: "/sincronos", label: "Curso ao vivo" },
   { to: "/sobre", label: "Sobre" },
 ] as const;
 

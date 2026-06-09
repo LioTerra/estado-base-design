@@ -3,7 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Container } from "./container";
 
 const nav = [
-  { to: "/estudos", label: "Estudos" },
+  { to: "/sincronos", label: "Curso ao vivo" },
   { to: "/sobre", label: "Sobre" },
 ] as const;
 

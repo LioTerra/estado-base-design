@@ -110,6 +110,14 @@ const BRAND_STYLES = `
   @media (min-width: 720px) {
     .eb-topbar-meta { display: flex; }
   }
+  .eb-topbar-link {
+    color:           var(--fg);
+    text-decoration: none;
+    font-size:       12px;
+    letter-spacing:  0.08em;
+    text-transform:  uppercase;
+  }
+  .eb-topbar-link:hover { color: var(--accent); }
 
   /* ── Hero ── */
   .eb-hero { padding-block: 5rem 4.5rem; }
@@ -836,6 +844,8 @@ export default function LandingPage() {
             <div className="eb-topbar-inner">
               <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
               <div className="eb-topbar-meta" aria-label="Resumo da turma">
+                <a href="/sincronos" className="eb-topbar-link">Curso ao vivo</a>
+                <span className="eb-dot" aria-hidden>·</span>
                 <span>{COURSE.meetings}</span>
                 <span className="eb-dot" aria-hidden>·</span>
                 <span>{COURSE.priceLabel}</span>

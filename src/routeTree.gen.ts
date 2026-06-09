@@ -11,11 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SincronosRouteImport } from './routes/sincronos'
-import { Route as MateriaisRouteImport } from './routes/materiais'
-import { Route as EstudosRouteImport } from './routes/estudos'
-import { Route as AssincronosRouteImport } from './routes/assincronos'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CursosNeuropsicologiaNaPraticaRouteImport } from './routes/cursos.neuropsicologia-na-pratica'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -27,99 +23,40 @@ const SincronosRoute = SincronosRouteImport.update({
   path: '/sincronos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MateriaisRoute = MateriaisRouteImport.update({
-  id: '/materiais',
-  path: '/materiais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstudosRoute = EstudosRouteImport.update({
-  id: '/estudos',
-  path: '/estudos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssincronosRoute = AssincronosRouteImport.update({
-  id: '/assincronos',
-  path: '/assincronos',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CursosNeuropsicologiaNaPraticaRoute =
-  CursosNeuropsicologiaNaPraticaRouteImport.update({
-    id: '/cursos/neuropsicologia-na-pratica',
-    path: '/cursos/neuropsicologia-na-pratica',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/assincronos': typeof AssincronosRoute
-  '/estudos': typeof EstudosRoute
-  '/materiais': typeof MateriaisRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/cursos/neuropsicologia-na-pratica': typeof CursosNeuropsicologiaNaPraticaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/assincronos': typeof AssincronosRoute
-  '/estudos': typeof EstudosRoute
-  '/materiais': typeof MateriaisRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/cursos/neuropsicologia-na-pratica': typeof CursosNeuropsicologiaNaPraticaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/assincronos': typeof AssincronosRoute
-  '/estudos': typeof EstudosRoute
-  '/materiais': typeof MateriaisRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/cursos/neuropsicologia-na-pratica': typeof CursosNeuropsicologiaNaPraticaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/assincronos'
-    | '/estudos'
-    | '/materiais'
-    | '/sincronos'
-    | '/sobre'
-    | '/cursos/neuropsicologia-na-pratica'
+  fullPaths: '/' | '/sincronos' | '/sobre'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/assincronos'
-    | '/estudos'
-    | '/materiais'
-    | '/sincronos'
-    | '/sobre'
-    | '/cursos/neuropsicologia-na-pratica'
-  id:
-    | '__root__'
-    | '/'
-    | '/assincronos'
-    | '/estudos'
-    | '/materiais'
-    | '/sincronos'
-    | '/sobre'
-    | '/cursos/neuropsicologia-na-pratica'
+  to: '/' | '/sincronos' | '/sobre'
+  id: '__root__' | '/' | '/sincronos' | '/sobre'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AssincronosRoute: typeof AssincronosRoute
-  EstudosRoute: typeof EstudosRoute
-  MateriaisRoute: typeof MateriaisRoute
   SincronosRoute: typeof SincronosRoute
   SobreRoute: typeof SobreRoute
-  CursosNeuropsicologiaNaPraticaRoute: typeof CursosNeuropsicologiaNaPraticaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -138,27 +75,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SincronosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/materiais': {
-      id: '/materiais'
-      path: '/materiais'
-      fullPath: '/materiais'
-      preLoaderRoute: typeof MateriaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estudos': {
-      id: '/estudos'
-      path: '/estudos'
-      fullPath: '/estudos'
-      preLoaderRoute: typeof EstudosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assincronos': {
-      id: '/assincronos'
-      path: '/assincronos'
-      fullPath: '/assincronos'
-      preLoaderRoute: typeof AssincronosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -166,24 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cursos/neuropsicologia-na-pratica': {
-      id: '/cursos/neuropsicologia-na-pratica'
-      path: '/cursos/neuropsicologia-na-pratica'
-      fullPath: '/cursos/neuropsicologia-na-pratica'
-      preLoaderRoute: typeof CursosNeuropsicologiaNaPraticaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AssincronosRoute: AssincronosRoute,
-  EstudosRoute: EstudosRoute,
-  MateriaisRoute: MateriaisRoute,
   SincronosRoute: SincronosRoute,
   SobreRoute: SobreRoute,
-  CursosNeuropsicologiaNaPraticaRoute: CursosNeuropsicologiaNaPraticaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -93,11 +93,36 @@ const BRAND_STYLES = `
     color:          var(--fg);
   }
   .eb-wordmark em { color: var(--accent); font-style: normal; }
+  .eb-topbar-inner {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    gap:             1rem;
+  }
+  .eb-topbar-meta {
+    display:        none;
+    align-items:    center;
+    gap:            1rem;
+    font-size:      12px;
+    color:          var(--muted-fg);
+    letter-spacing: 0.04em;
+  }
+  @media (min-width: 720px) {
+    .eb-topbar-meta { display: flex; }
+  }
 
   /* ── Hero ── */
-  .eb-hero { padding-block: 8rem 6rem; }
-  @media (min-width: 768px) { .eb-hero { padding-block: 10rem 8rem; } }
-  .eb-hero h1 { font-size: clamp(40px, 7vw, 68px); margin-block: 2rem 1.5rem; }
+  .eb-hero { padding-block: 5rem 4.5rem; }
+  @media (min-width: 768px) { .eb-hero { padding-block: 7rem 5.5rem; } }
+  .eb-hero-grid {
+    display: grid;
+    gap:     3rem;
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .eb-hero-grid { grid-template-columns: minmax(0, 1.2fr) 390px; }
+  }
+  .eb-hero h1 { font-size: clamp(40px, 7vw, 68px); margin-block: 1.5rem 1.25rem; }
   .eb-hero h1 em { color: var(--accent); }
   .eb-lede {
     font-size:    19px;
@@ -115,6 +140,90 @@ const BRAND_STYLES = `
     margin-bottom: 2.5rem;
   }
   .eb-dot { color: var(--border); }
+  .eb-hero-actions {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         0.9rem;
+    align-items: center;
+  }
+  .eb-hero-note {
+    font-size: 13px;
+    color:     var(--muted-fg);
+  }
+  .eb-offer-card {
+    border:     1px solid var(--border);
+    background: rgba(237,232,223,0.72);
+    padding:    2rem;
+    box-shadow: 0 18px 45px rgba(28,26,46,0.08);
+  }
+  .eb-offer-kicker {
+    font-size:      11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color:          var(--accent);
+    margin-bottom:  1.25rem;
+  }
+  .eb-offer-price {
+    font-family:    'Playfair Display', serif;
+    font-size:      54px;
+    line-height:    1;
+    letter-spacing: -0.02em;
+    color:          var(--fg);
+    margin-bottom:  0.45rem;
+  }
+  .eb-offer-sub {
+    font-size:     14px;
+    color:         var(--muted-fg);
+    margin-bottom: 1.5rem;
+  }
+  .eb-offer-rows {
+    display:       grid;
+    border-top:    1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .eb-offer-row {
+    display:         flex;
+    justify-content: space-between;
+    gap:             1rem;
+    padding-block:   0.8rem;
+    font-size:       14px;
+    border-bottom:   1px solid var(--border);
+  }
+  .eb-offer-row:last-child { border-bottom: none; }
+  .eb-offer-row span:first-child { color: var(--muted-fg); }
+  .eb-offer-row strong { text-align: right; }
+  .eb-offer-footnote {
+    margin-top:  0.9rem;
+    font-size:   12px;
+    color:       var(--muted-fg);
+    line-height: 1.45;
+  }
+  .eb-trust-strip {
+    padding-block: 1.3rem;
+    background:    var(--secondary);
+    border-block:  1px solid var(--border);
+  }
+  .eb-trust-grid {
+    display: grid;
+    gap:     1rem;
+  }
+  @media (min-width: 760px) {
+    .eb-trust-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .eb-trust-item {
+    display:     flex;
+    gap:         0.8rem;
+    align-items: baseline;
+    font-size:   14px;
+    color:       var(--muted-fg);
+  }
+  .eb-trust-item strong {
+    font-family: 'Playfair Display', serif;
+    font-size:   24px;
+    color:       var(--accent);
+    white-space: nowrap;
+  }
 
   /* ── Buttons ── */
   .eb-btn {
@@ -138,6 +247,50 @@ const BRAND_STYLES = `
     color:      var(--accent-fg);
   }
   .eb-btn-primary:hover { background: #6a1a1a; }
+  .eb-btn-secondary {
+    background: transparent;
+    color:      var(--fg);
+    box-shadow: inset 0 0 0 1px var(--border);
+  }
+  .eb-btn-secondary:hover { box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent); }
+  .eb-btn-small {
+    padding:    0.62rem 1rem;
+    font-size:  11px;
+  }
+  .eb-btn-wide { justify-content: center; width: 100%; }
+
+  /* ── Audience ── */
+  .eb-audience-grid {
+    display: grid;
+    gap:     1.25rem;
+    margin-top: 3rem;
+  }
+  @media (min-width: 760px) {
+    .eb-audience-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .eb-audience-item {
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+  .eb-audience-item strong {
+    display:       block;
+    font-size:     18px;
+    line-height:   1.35;
+    margin-bottom: 0.6rem;
+  }
+  .eb-audience-item p {
+    font-size:   14px;
+    line-height: 1.55;
+    color:       var(--muted-fg);
+  }
+  .eb-proof-note {
+    margin-top: 3rem;
+    padding:    1.25rem 1.4rem;
+    border-left: 3px solid var(--accent);
+    background: var(--secondary);
+    font-size:  15px;
+    color:      var(--fg);
+  }
 
   /* ── Outcomes ── */
   .eb-outcomes { list-style: none; display: grid; gap: 0; }
@@ -184,6 +337,37 @@ const BRAND_STYLES = `
     margin-bottom:  1rem;
   }
   .eb-bio-text h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 1.75rem; }
+  .eb-bio-card {
+    border:     1px solid var(--border);
+    background: var(--secondary);
+    padding:    2rem;
+  }
+  .eb-bio-card-label {
+    font-size:      11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color:          var(--muted-fg);
+    margin-bottom:  1.1rem;
+  }
+  .eb-bio-card strong {
+    display:     block;
+    font-family: 'Playfair Display', serif;
+    font-size:   30px;
+    line-height: 1.12;
+    color:       var(--fg);
+  }
+  .eb-bio-card ul {
+    list-style: none;
+    margin-top: 1.5rem;
+    display:    grid;
+    gap:        0.8rem;
+    font-size:  14px;
+    color:      var(--muted-fg);
+  }
+  .eb-bio-card li::before {
+    content: '— ';
+    color:   var(--accent);
+  }
 
   /* ── Formato ── */
   .eb-formato {
@@ -338,9 +522,11 @@ const BRAND_STYLES = `
   /* ── Pricing ── */
   .eb-pricing-wrap {
     border:     1px solid var(--border);
-    padding:    3.5rem;
+    padding:    3rem;
     max-width:  60rem;
     margin:     0 auto;
+    background: linear-gradient(180deg, rgba(237,232,223,0.74), rgba(247,243,238,0.92));
+    box-shadow: 0 22px 60px rgba(28,26,46,0.1);
   }
   @media (max-width: 640px) { .eb-pricing-wrap { padding: 2rem 1.5rem; } }
   .eb-pricing-label {
@@ -366,6 +552,29 @@ const BRAND_STYLES = `
   .eb-price-installments { font-size: 14px; color: var(--muted-fg); margin-top: 0.5rem; }
   .eb-price-includes   { font-size: 15px; color: var(--muted-fg); margin-bottom: 1.75rem; line-height: 1.55; }
   .eb-price-secure     { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-top: 0.75rem; }
+  .eb-price-checklist {
+    list-style: none;
+    display:    grid;
+    gap:        0.7rem;
+    margin:     1.4rem 0 1.8rem;
+    font-size:  14px;
+    color:      var(--fg);
+  }
+  .eb-price-checklist li::before {
+    content: '✓';
+    color:   var(--accent);
+    margin-right: 0.55rem;
+  }
+  .eb-price-meta {
+    display:       grid;
+    gap:           0.55rem;
+    margin-top:    1.3rem;
+    padding-top:   1.3rem;
+    border-top:    1px solid var(--border);
+    font-size:     13px;
+    color:         var(--muted-fg);
+  }
+  .eb-price-meta strong { color: var(--fg); }
 
   /* ── FAQ ── */
   .eb-faq-grid {
@@ -516,6 +725,24 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return <span className="eb-eyebrow">{children}</span>
 }
 
+function signupHref() {
+  return COURSE.checkoutUrl === '#' ? '#inscricao' : COURSE.checkoutUrl
+}
+
+function SignupLink({
+  children,
+  className = 'eb-btn eb-btn-primary',
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <a href={signupHref()} className={className} onClick={trackInitiateCheckout}>
+      {children} <span aria-hidden>→</span>
+    </a>
+  )
+}
+
 // ─── Testimonials (with seamless marquee loop) ───────────────────────────────
 
 function Testimonials() {
@@ -606,32 +833,85 @@ export default function LandingPage() {
         {/* ── TOP BAR ─────────────────────────────────────────────────────── */}
         <header className="eb-topbar">
           <div className="eb-container eb-container-6xl">
-            <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
+            <div className="eb-topbar-inner">
+              <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
+              <div className="eb-topbar-meta" aria-label="Resumo da turma">
+                <span>{COURSE.meetings}</span>
+                <span className="eb-dot" aria-hidden>·</span>
+                <span>{COURSE.priceLabel}</span>
+                <SignupLink className="eb-btn eb-btn-primary eb-btn-small">Inscrever</SignupLink>
+              </div>
+            </div>
           </div>
         </header>
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
         <section className="eb-hero">
-          <div className="eb-container eb-container-3xl">
-            <Eyebrow>Curso intensivo online · Psicologia e neurociência</Eyebrow>
-            <h1>
-              Personalidade:<br />
-              perspectivas <em>psico e neurobiológicas.</em>
-            </h1>
-            <p className="eb-lede">
-              Um percurso para entender como traços, temperamento, genética, ambiente
-              e neurodesenvolvimento participam da formação da personalidade humana.
-            </p>
-            <div className="eb-hero-meta">
-              <span>com <strong>Vicente Cotanda</strong></span>
-              <span className="eb-dot" aria-hidden>·</span>
-              <span>Próxima turma em <strong>{COURSE.startDateLabel}</strong></span>
-              <span className="eb-dot" aria-hidden>·</span>
-              <span><strong>{COURSE.spots}</strong> vagas</span>
+          <div className="eb-container eb-container-6xl">
+            <div className="eb-hero-grid">
+              <div>
+                <Eyebrow>Curso online ao vivo · Psicologia e neurociência</Eyebrow>
+                <h1>Entenda personalidade sem cair em explicação rasa.</h1>
+                <p className="eb-lede">
+                  Um curso direto e bem guiado para entender traços, temperamento,
+                  genética, ambiente e neurodesenvolvimento na formação da personalidade.
+                </p>
+                <div className="eb-hero-meta">
+                  <span>com <strong>Vicente Cotanda</strong></span>
+                  <span className="eb-dot" aria-hidden>·</span>
+                  <span>começa em <strong>{COURSE.startDateLabel}</strong></span>
+                  <span className="eb-dot" aria-hidden>·</span>
+                  <span><strong>{COURSE.spots}</strong> vagas</span>
+                </div>
+                <div className="eb-hero-actions">
+                  <SignupLink>Quero entrar na turma</SignupLink>
+                  <a href="#conteudo" className="eb-btn eb-btn-secondary">
+                    Ver conteúdo <span aria-hidden>↓</span>
+                  </a>
+                  <span className="eb-hero-note">Aulas ao vivo, gravações e certificado.</span>
+                </div>
+              </div>
+
+              <aside className="eb-offer-card" aria-label="Resumo da inscrição">
+                <div className="eb-offer-kicker">Próxima turma</div>
+                <div className="eb-offer-price">{COURSE.priceLabel}</div>
+                <div className="eb-offer-sub">
+                  ou em até {COURSE.maxInstallments} parcelas no cartão
+                </div>
+                <div className="eb-offer-rows">
+                  <div className="eb-offer-row">
+                    <span>Início</span>
+                    <strong>{COURSE.startDateLabel}</strong>
+                  </div>
+                  <div className="eb-offer-row">
+                    <span>Formato</span>
+                    <strong>{COURSE.meetings}</strong>
+                  </div>
+                  <div className="eb-offer-row">
+                    <span>Horário</span>
+                    <strong>{COURSE.schedule}</strong>
+                  </div>
+                  <div className="eb-offer-row">
+                    <span>Vagas</span>
+                    <strong>{COURSE.spots}</strong>
+                  </div>
+                </div>
+                <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Garantir vaga</SignupLink>
+                <p className="eb-offer-footnote">
+                  Inclui encontros ao vivo, gravações, material de revisão e certificado.
+                </p>
+              </aside>
             </div>
-            <a href="#inscricao" className="eb-btn eb-btn-primary">
-              Quero me inscrever <span aria-hidden>→</span>
-            </a>
+          </div>
+        </section>
+
+        <section className="eb-trust-strip" aria-label="Resumo do curso">
+          <div className="eb-container eb-container-6xl">
+            <div className="eb-trust-grid">
+              <div className="eb-trust-item"><strong>3</strong><span>encontros ao vivo para organizar o tema sem enrolação.</span></div>
+              <div className="eb-trust-item"><strong>4h30</strong><span>de aula, com gravação e material escrito para revisar.</span></div>
+              <div className="eb-trust-item"><strong>{COURSE.spots}</strong><span>vagas para uma turma enxuta, com começo definido.</span></div>
+            </div>
           </div>
         </section>
 
@@ -639,24 +919,29 @@ export default function LandingPage() {
 
         {/* ── PARA QUEM É ─────────────────────────────────────────────────── */}
         <section className="eb-section">
-          <div className="eb-container eb-container-3xl">
+          <div className="eb-container eb-container-6xl">
             <div className="eb-section-head">
               <Eyebrow>Para quem</Eyebrow>
               <h2 style={{ marginTop: '1.5rem' }}>
-                Para quem quer pensar a personalidade <em>sem simplificar o humano.</em>
+                Feito para quem precisa de mapa, não de frase pronta.
               </h2>
             </div>
-            <div className="eb-prose">
-              <p>
-                Para quem percebe que explicações sobre comportamento humano costumam
-                cair em dois extremos: ou reduzem tudo ao cérebro, ou ignoram a biologia
-                como se ela não participasse da vida psicológica.
-              </p>
-              <p>
-                Este curso organiza uma terceira via: entender a personalidade como um
-                fenômeno estável, mas não fixo; biológico, mas não determinista; individual,
-                mas sempre atravessado por ambiente, cultura e história de vida.
-              </p>
+            <div className="eb-audience-grid">
+              <div className="eb-audience-item">
+                <strong>Você estuda comportamento humano.</strong>
+                <p>Psicologia, neurociência, educação, clínica ou desenvolvimento pessoal com rigor.</p>
+              </div>
+              <div className="eb-audience-item">
+                <strong>Você quer entender diferenças individuais.</strong>
+                <p>Traços, temperamento, genética e ambiente sem cair em determinismo barato.</p>
+              </div>
+              <div className="eb-audience-item">
+                <strong>Você gosta de aula densa, mas clara.</strong>
+                <p>Um percurso organizado, com começo, meio e fim, para sair com repertório aplicável.</p>
+              </div>
+            </div>
+            <div className="eb-proof-note">
+              A promessa aqui não é transformar personalidade em fórmula. É te dar uma lente mais precisa para observar como estabilidade, mudança, corpo, história e contexto se combinam.
             </div>
           </div>
         </section>
@@ -686,7 +971,7 @@ export default function LandingPage() {
         <Divider />
 
         {/* ── OUTCOMES ────────────────────────────────────────────────────── */}
-        <section className="eb-section">
+        <section className="eb-section" id="conteudo">
           <div className="eb-container eb-container-6xl">
             <div className="eb-section-head" style={{ textAlign: 'left', maxWidth: '60ch', marginBottom: '5rem' }}>
               <Eyebrow>O que você levará</Eyebrow>
@@ -718,12 +1003,15 @@ export default function LandingPage() {
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
             <div className="eb-bio">
-              <figure>
-                <div className="eb-bio-photo">
-                  <span className="eb-bio-photo-label">retrato — Vicente Cotanda</span>
-                </div>
-                <figcaption className="eb-bio-caption">Me. Vicente Dall'Igna Cotanda · Doutorando em Neurociências</figcaption>
-              </figure>
+              <aside className="eb-bio-card" aria-label="Credenciais de Vicente Cotanda">
+                <div className="eb-bio-card-label">Quem conduz</div>
+                <strong>Vicente Dall'Igna Cotanda</strong>
+                <ul>
+                  <li>Psicólogo e mestre</li>
+                  <li>Doutorando em Neurociências no InsCer-RS</li>
+                  <li>Pesquisa e ensino com foco em personalidade, comportamento e desenvolvimento</li>
+                </ul>
+              </aside>
               <div className="eb-bio-text">
                 <div className="eb-bio-label">Sobre quem conduz</div>
                 <h2>Vicente Cotanda.</h2>
@@ -808,27 +1096,32 @@ export default function LandingPage() {
             <div className="eb-pricing-wrap">
               <div className="eb-pricing-label">Inscrição</div>
               <h2>
-                Um investimento acessível<br />
-                <em>em repertório psicológico real.</em>
+                Entre na próxima turma<br />
+                <em>com tudo organizado.</em>
               </h2>
               <div className="eb-pricing-grid">
                 <div>
                   <div className="eb-price-label">Valor</div>
                   <div className="eb-price-amount">{COURSE.priceLabel}</div>
                   <div className="eb-price-installments">ou em até {COURSE.maxInstallments} parcelas no cartão</div>
+                  <div className="eb-price-meta">
+                    <span>Início: <strong>{COURSE.startDateLabel}</strong></span>
+                    <span>Formato: <strong>{COURSE.meetings}</strong></span>
+                    <span>Vagas: <strong>{COURSE.spots}</strong></span>
+                  </div>
                 </div>
                 <div>
                   <p className="eb-price-includes">
-                    Inclui 3 encontros ao vivo, acesso às gravações, material escrito
-                    de revisão e certificado de participação.
+                    Você entra para uma turma ao vivo, acompanha as aulas com Vicente
+                    e recebe o material para revisar depois sem depender só da memória.
                   </p>
-                  <a
-                    href={COURSE.checkoutUrl}
-                    className="eb-btn eb-btn-primary"
-                    onClick={trackInitiateCheckout}
-                  >
-                    Quero me inscrever <span aria-hidden>→</span>
-                  </a>
+                  <ul className="eb-price-checklist">
+                    <li>3 encontros ao vivo</li>
+                    <li>Gravações para rever no seu ritmo</li>
+                    <li>Material escrito de revisão</li>
+                    <li>Certificado de participação</li>
+                  </ul>
+                  <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Quero garantir minha vaga</SignupLink>
                   <div className="eb-price-secure">Pagamento seguro · processado pela Hotmart</div>
                 </div>
               </div>
@@ -866,9 +1159,7 @@ export default function LandingPage() {
               As aulas começam em<br />
               <em>{COURSE.startDateLabel}.</em>
             </h2>
-            <a href="#inscricao" className="eb-btn eb-btn-primary">
-              Quero me inscrever <span aria-hidden>→</span>
-            </a>
+            <SignupLink>Quero entrar na turma</SignupLink>
             <div className="eb-final-cta-vagas">{COURSE.spots} vagas disponíveis</div>
           </div>
         </section>

@@ -1023,11 +1023,7 @@ export default function LandingPage() {
             <div className="eb-topbar-inner">
               <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
               <div className="eb-topbar-meta" aria-label="Resumo da turma">
-                <a href="/sincronos" className="eb-topbar-link">Curso ao vivo</a>
-                <span className="eb-dot" aria-hidden>·</span>
                 <span>{COURSE.meetings}</span>
-                <span className="eb-dot" aria-hidden>·</span>
-                <span>{COURSE.priceLabel}</span>
                 <SignupLink className="eb-btn eb-btn-primary eb-btn-small">Inscrever</SignupLink>
               </div>
             </div>
@@ -1042,8 +1038,9 @@ export default function LandingPage() {
                 <Eyebrow>Curso online ao vivo · Psicologia e neurociência</Eyebrow>
                 <h1>Entenda personalidade sem cair em explicação rasa.</h1>
                 <p className="eb-lede">
-                  Um curso direto e bem guiado para entender traços, temperamento,
-                  genética, ambiente e neurodesenvolvimento na formação da personalidade.
+                  Um percurso para entender como traços, temperamento, genética,
+                  ambiente e neurodesenvolvimento participam da formação da
+                  personalidade humana.
                 </p>
                 <div className="eb-hero-meta">
                   <span>com <strong>Vicente Cotanda</strong></span>
@@ -1063,10 +1060,6 @@ export default function LandingPage() {
 
               <aside className="eb-offer-card" aria-label="Resumo da inscrição">
                 <div className="eb-offer-kicker">Próxima turma</div>
-                <div className="eb-offer-price">{COURSE.priceLabel}</div>
-                <div className="eb-offer-sub">
-                  ou em até {COURSE.maxInstallments} parcelas no cartão
-                </div>
                 <div className="eb-offer-rows">
                   <div className="eb-offer-row">
                     <span>Início</span>
@@ -1168,35 +1161,6 @@ export default function LandingPage() {
 
         <Divider />
 
-        {/* ── FORMATO ─────────────────────────────────────────────────────── */}
-        <section className="eb-section">
-          <div className="eb-container eb-container-6xl">
-            <div className="eb-formato">
-              <div>
-                <div className="eb-bio-label">Formato</div>
-                <h2>Como o curso<br />acontece.</h2>
-              </div>
-              <dl>
-                {[
-                  ['Duração',       COURSE.duration],
-                  ['Encontros',     COURSE.meetings],
-                  ['Dia e horário', COURSE.schedule],
-                  ['Carga horária', COURSE.workload],
-                  ['Material',      'Resumo escrito e gravação de cada aula'],
-                  ['Certificado',   'Certificado de participação incluso'],
-                ].map(([k, v]) => (
-                  <div key={k} className="eb-formato-row">
-                    <dt>{k}</dt>
-                    <dd>{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
         {/* ── ENCONTROS ───────────────────────────────────────────────────── */}
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
@@ -1247,7 +1211,9 @@ export default function LandingPage() {
                   <div className="eb-price-installments">ou em até {COURSE.maxInstallments} parcelas no cartão</div>
                   <div className="eb-price-meta">
                     <span>Início: <strong>{COURSE.startDateLabel}</strong></span>
+                    <span>Duração: <strong>{COURSE.duration}</strong></span>
                     <span>Formato: <strong>{COURSE.meetings}</strong></span>
+                    <span>Horário: <strong>{COURSE.schedule}</strong></span>
                     <span>Vagas: <strong>{COURSE.spots}</strong></span>
                   </div>
                 </div>

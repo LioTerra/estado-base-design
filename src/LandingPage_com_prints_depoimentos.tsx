@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
 // Add these to your globals.css / styles.css under :root if you prefer;
@@ -614,6 +614,120 @@ const BRAND_STYLES = `
   .eb-final-cta .eb-btn-primary:hover { background: #e8e2da; }
   .eb-final-cta-vagas  { margin-top: 1.5rem; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.55; }
 
+  /* ── Brief additions ── */
+  .eb-video-section {
+    background: #0F0E1A;
+    color:      #F4F0EA;
+    padding-block: 5rem;
+  }
+  @media (min-width: 768px) { .eb-video-section { padding-block: 6.5rem; } }
+  .eb-video-grid {
+    display: grid;
+    gap:     3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) { .eb-video-grid { grid-template-columns: 0.8fr 1.2fr; } }
+  .eb-video-section .eb-eyebrow { color: var(--primary); }
+  .eb-video-section .eb-eyebrow::before { background: var(--primary); }
+  .eb-video-title {
+    color:        #F4F0EA;
+    font-size:    clamp(32px, 5vw, 52px);
+    margin-top:   1.25rem;
+  }
+  .eb-video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(244,240,234,0.24);
+    background: rgba(244,240,234,0.04);
+  }
+  .eb-video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    border: 0;
+    color: #F4F0EA;
+    background: transparent;
+    cursor: pointer;
+  }
+  .eb-video-play {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid rgba(244,240,234,0.55);
+    border-radius: 999px;
+  }
+  .eb-video-play::before {
+    content: '';
+    display: block;
+    margin-left: 0.25rem;
+    width: 0;
+    height: 0;
+    border-top: 0.55rem solid transparent;
+    border-bottom: 0.55rem solid transparent;
+    border-left: 0.8rem solid currentColor;
+  }
+  .eb-video-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .eb-proposal-head {
+    max-width: 70ch;
+    margin-bottom: 4rem;
+  }
+  .eb-proposal-head h2 {
+    font-size: clamp(32px, 5vw, 52px);
+    margin-block: 1.5rem 2rem;
+  }
+  .eb-proposal-head h2 em {
+    color: var(--accent);
+  }
+  .eb-outcomes-label {
+    font-size:      11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color:          var(--muted-fg);
+    margin-bottom:  1.25rem;
+  }
+  .eb-featured-testimonial {
+    padding-block: 5rem;
+  }
+  @media (min-width: 768px) { .eb-featured-testimonial { padding-block: 7rem; } }
+  .eb-featured-quote {
+    max-width: 58rem;
+    margin: 0 auto;
+  }
+  .eb-featured-quote blockquote {
+    margin: 0;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.22;
+    color: var(--fg);
+  }
+  .eb-featured-quote figcaption {
+    margin-top: 2rem;
+    font-size: 14px;
+    color: var(--muted-fg);
+  }
+  .eb-featured-quote strong {
+    display: block;
+    color: var(--fg);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .eb-guarantee {
+    margin-top: 1rem;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted-fg);
+  }
+
   /* ── Footer ── */
   .eb-footer { border-top: 1px solid var(--border); padding-block: 2.5rem; }
   .eb-footer-inner {
@@ -648,6 +762,14 @@ const COURSE = {
   workload: '4h30 de encontros síncronos',
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
   metaPixelId: '',                      // TBD
+}
+
+const VIDEO_URL: string = ''
+
+const FEATURED_TESTIMONIAL: { quote: string; author: string; role: string } = {
+  quote: '',
+  author: '',
+  role: '',
 }
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
@@ -746,8 +868,65 @@ function SignupLink({
 }) {
   return (
     <a href={signupHref()} className={className} onClick={trackInitiateCheckout}>
-      {children} <span aria-hidden>→</span>
+      {children}
     </a>
+  )
+}
+
+function VideoSection() {
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  if (!VIDEO_URL) return null
+
+  return (
+    <section className="eb-video-section">
+      <div className="eb-container eb-container-6xl">
+        <div className="eb-video-grid">
+          <div>
+            <Eyebrow>Assista</Eyebrow>
+            <h2 className="eb-video-title">Noventa segundos de aula.</h2>
+          </div>
+          <div className="eb-video-frame">
+            {isPlaying ? (
+              <iframe
+                className="eb-video-iframe"
+                src={VIDEO_URL}
+                title="Noventa segundos de aula"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                type="button"
+                className="eb-video-placeholder"
+                aria-label="Reproduzir vídeo"
+                onClick={() => setIsPlaying(true)}
+              >
+                <span className="eb-video-play" aria-hidden />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function FeaturedTestimonial() {
+  if (!FEATURED_TESTIMONIAL.quote) return null
+
+  return (
+    <section className="eb-featured-testimonial">
+      <div className="eb-container eb-container-6xl">
+        <figure className="eb-featured-quote">
+          <blockquote>{FEATURED_TESTIMONIAL.quote}</blockquote>
+          <figcaption>
+            <strong>{FEATURED_TESTIMONIAL.author}</strong>
+            {FEATURED_TESTIMONIAL.role}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
   )
 }
 
@@ -876,7 +1055,7 @@ export default function LandingPage() {
                 <div className="eb-hero-actions">
                   <SignupLink>Quero entrar na turma</SignupLink>
                   <a href="#conteudo" className="eb-btn eb-btn-secondary">
-                    Ver conteúdo <span aria-hidden>↓</span>
+                    Ver conteúdo
                   </a>
                   <span className="eb-hero-note">Aulas ao vivo, gravações e certificado.</span>
                 </div>
@@ -915,80 +1094,28 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="eb-trust-strip" aria-label="Resumo do curso">
-          <div className="eb-container eb-container-6xl">
-            <div className="eb-trust-grid">
-              <div className="eb-trust-item"><strong>3</strong><span>encontros ao vivo para organizar o tema sem enrolação.</span></div>
-              <div className="eb-trust-item"><strong>4h30</strong><span>de aula, com gravação e material escrito para revisar.</span></div>
-              <div className="eb-trust-item"><strong>{COURSE.spots}</strong><span>vagas para uma turma enxuta, com começo definido.</span></div>
-            </div>
-          </div>
-        </section>
+        <VideoSection />
 
-        <Divider />
+        {!VIDEO_URL ? <Divider /> : null}
 
-        {/* ── PARA QUEM É ─────────────────────────────────────────────────── */}
-        <section className="eb-section">
-          <div className="eb-container eb-container-6xl">
-            <div className="eb-section-head">
-              <Eyebrow>Para quem</Eyebrow>
-              <h2 style={{ marginTop: '1.5rem' }}>
-                Feito para quem precisa de mapa, não de frase pronta.
-              </h2>
-            </div>
-            <div className="eb-audience-grid">
-              <div className="eb-audience-item">
-                <strong>Você estuda comportamento humano.</strong>
-                <p>Psicologia, neurociência, educação, clínica ou desenvolvimento pessoal com rigor.</p>
-              </div>
-              <div className="eb-audience-item">
-                <strong>Você quer entender diferenças individuais.</strong>
-                <p>Traços, temperamento, genética e ambiente sem cair em determinismo barato.</p>
-              </div>
-              <div className="eb-audience-item">
-                <strong>Você gosta de aula densa, mas clara.</strong>
-                <p>Um percurso organizado, com começo, meio e fim, para sair com repertório aplicável.</p>
-              </div>
-            </div>
-            <div className="eb-proof-note">
-              A promessa aqui não é transformar personalidade em fórmula. É te dar uma lente mais precisa para observar como estabilidade, mudança, corpo, história e contexto se combinam.
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── A VIRADA ────────────────────────────────────────────────────── */}
-        <section className="eb-section">
-          <div className="eb-container eb-container-3xl">
-            <div className="eb-section-head">
-              <Eyebrow>A virada</Eyebrow>
-              <h2 style={{ marginTop: '1.5rem' }}>
-                O que muda quando você entende <em>a formação dos traços.</em>
-              </h2>
-            </div>
-            <div className="eb-prose">
-              <p>
-                A virada é sair da pergunta rasa — “isso vem dos genes ou do ambiente?” —
-                e aprender a observar como disposições inatas, experiências repetidas,
-                vínculos, riscos, proteções e maturação cerebral se combinam na trajetória
-                de uma pessoa.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── OUTCOMES ────────────────────────────────────────────────────── */}
+        {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">
           <div className="eb-container eb-container-6xl">
-            <div className="eb-section-head" style={{ textAlign: 'left', maxWidth: '60ch', marginBottom: '5rem' }}>
-              <Eyebrow>O que você levará</Eyebrow>
-              <h2 style={{ marginTop: '1.5rem', textAlign: 'left' }}>
-                Um mapa para compreender <em>diferenças individuais.</em>
+            <div className="eb-proposal-head">
+              <Eyebrow>A proposta</Eyebrow>
+              <h2>
+                Pensar a personalidade <em>sem simplificar o humano.</em>
               </h2>
+              <div className="eb-prose">
+                <p>
+                  Explicações sobre comportamento humano costumam cair em dois extremos: ou reduzem tudo ao cérebro, ou ignoram a biologia como se ela não participasse da vida psicológica. Este curso organiza uma terceira via — sair da pergunta rasa 'genes ou ambiente?' e observar como disposições inatas, vínculos, riscos, proteções e maturação cerebral se combinam na trajetória de uma pessoa.
+                </p>
+                <p>
+                  Personalidade como fenômeno estável, mas não fixo; biológico, mas não determinista; individual, mas sempre atravessado por ambiente, cultura e história de vida.
+                </p>
+              </div>
             </div>
+            <div className="eb-outcomes-label">O que você levará</div>
             <ol className="eb-outcomes">
               {[
                 'Compreender personalidade como padrão relativamente estável de emoções, pensamentos e comportamentos.',
@@ -1008,6 +1135,10 @@ export default function LandingPage() {
         </section>
 
         <Divider />
+
+        <FeaturedTestimonial />
+
+        {FEATURED_TESTIMONIAL.quote ? <Divider /> : null}
 
         {/* ── BIO ─────────────────────────────────────────────────────────── */}
         <section className="eb-section">
@@ -1126,13 +1257,16 @@ export default function LandingPage() {
                     e recebe o material para revisar depois sem depender só da memória.
                   </p>
                   <ul className="eb-price-checklist">
-                    <li>3 encontros ao vivo</li>
+                    <li>{COURSE.meetings}</li>
                     <li>Gravações para rever no seu ritmo</li>
                     <li>Material escrito de revisão</li>
                     <li>Certificado de participação</li>
                   </ul>
-                  <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Quero garantir minha vaga</SignupLink>
-                  <div className="eb-price-secure">Pagamento seguro · processado pela Hotmart</div>
+                  <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Quero me inscrever</SignupLink>
+                  <p className="eb-guarantee">
+                    Garantia incondicional de 7 dias — pagamento processado pela Hotmart.<br />
+                    Se não for para você, devolvemos integralmente.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1160,6 +1294,8 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        <Divider />
 
         {/* ── CTA FINAL ───────────────────────────────────────────────────── */}
         <section className="eb-final-cta">

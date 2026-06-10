@@ -1108,7 +1108,7 @@ export default function LandingPage() {
               </h2>
               <div className="eb-prose">
                 <p>
-                  Explicações sobre comportamento humano costumam cair em dois extremos: ou reduzem tudo ao cérebro, ou ignoram a biologia como se ela não participasse da vida psicológica. Este curso organiza uma terceira via — sair da pergunta rasa 'genes ou ambiente?' e observar como disposições inatas, vínculos, riscos, proteções e maturação cerebral se combinam na trajetória de uma pessoa.
+                  Explicações sobre comportamento humano costumam cair em dois extremos: ou reduzem tudo ao cérebro, ou ignoram a biologia como se ela não participasse da vida psicológica. Este curso organiza uma terceira via — sair da pergunta rasa “genes ou ambiente?” e observar como disposições inatas, vínculos, riscos, proteções e maturação cerebral se combinam na trajetória de uma pessoa.
                 </p>
                 <p>
                   Personalidade como fenômeno estável, mas não fixo; biológico, mas não determinista; individual, mas sempre atravessado por ambiente, cultura e história de vida.

@@ -677,6 +677,21 @@ const BRAND_STYLES = `
     height: 100%;
     border: 0;
   }
+  .eb-video-soon {
+    position:        absolute;
+    inset:           0;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+  }
+  .eb-video-soon span {
+    font-size:       12px;
+    letter-spacing:  0.2em;
+    text-transform:  uppercase;
+    color:           rgba(244,240,234,0.55);
+    border:          1px solid rgba(244,240,234,0.25);
+    padding:         0.6rem 1.1rem;
+  }
   .eb-proposal-head {
     max-width: 70ch;
     margin-bottom: 4rem;
@@ -876,8 +891,6 @@ function SignupLink({
 function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false)
 
-  if (!VIDEO_URL) return null
-
   return (
     <section className="eb-video-section">
       <div className="eb-container eb-container-6xl">
@@ -887,7 +900,11 @@ function VideoSection() {
             <h2 className="eb-video-title">Noventa segundos de aula.</h2>
           </div>
           <div className="eb-video-frame">
-            {isPlaying ? (
+            {!VIDEO_URL ? (
+              <div className="eb-video-soon" aria-label="Vídeo em breve">
+                <span>Trecho de aula — em breve</span>
+              </div>
+            ) : isPlaying ? (
               <iframe
                 className="eb-video-iframe"
                 src={VIDEO_URL}
@@ -1088,8 +1105,6 @@ export default function LandingPage() {
         </section>
 
         <VideoSection />
-
-        {!VIDEO_URL ? <Divider /> : null}
 
         {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">

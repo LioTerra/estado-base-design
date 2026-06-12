@@ -779,6 +779,8 @@ const COURSE = {
   metaPixelId: '',                      // TBD
 }
 
+const VIDEO_URL = ''
+
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
 // Não faz nada enquanto COURSE.metaPixelId estiver vazio.
 declare global {
@@ -865,6 +867,36 @@ function SignupLink({
 }
 
 // ─── Testimonials (with seamless marquee loop) ───────────────────────────────
+
+function VideoSection() {
+  return (
+    <section className="eb-video-section" aria-label="Vídeo do curso">
+      <div className="eb-container eb-container-6xl">
+        <div className="eb-video-grid">
+          <div>
+            <Eyebrow>Vídeo</Eyebrow>
+            <h2 className="eb-video-title">Um espaço para a aula aparecer.</h2>
+          </div>
+          <div className="eb-video-frame">
+            {VIDEO_URL ? (
+              <iframe
+                className="eb-video-iframe"
+                src={VIDEO_URL}
+                title="Vídeo do curso"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : (
+              <div className="eb-video-soon" aria-label="Vídeo em breve">
+                <span>Vídeo em breve</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -998,6 +1030,8 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        <VideoSection />
 
         {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">

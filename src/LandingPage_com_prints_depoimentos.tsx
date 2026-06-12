@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
 // Add these to your globals.css / styles.css under :root if you prefer;
@@ -128,7 +128,7 @@ const BRAND_STYLES = `
     align-items: center;
   }
   @media (min-width: 960px) {
-    .eb-hero-grid { grid-template-columns: minmax(0, 1.2fr) 390px; }
+    .eb-hero-grid { max-width: 56rem; }
   }
   .eb-hero h1 { font-size: clamp(40px, 7vw, 68px); margin-block: 1.5rem 1.25rem; }
   .eb-hero h1 em { color: var(--accent); }
@@ -326,7 +326,7 @@ const BRAND_STYLES = `
     gap:        4rem;
     align-items:start;
   }
-  @media (min-width: 768px) { .eb-bio { grid-template-columns: 280px 1fr; } }
+  @media (min-width: 768px) { .eb-bio { grid-template-columns: 1fr; } }
   .eb-bio-photo {
     aspect-ratio:  3/4;
     background:    var(--secondary);
@@ -768,23 +768,15 @@ const COURSE = {
   // Preço
   priceLabel: 'R$ 149',                 // TBD — placeholder
   maxInstallments: 12,
-  // Link do checkout Hotmart. Enquanto for '#', o botão só ancora na seção.
+  // Link do checkout. Enquanto for '#', o botão só ancora na seção.
   checkoutUrl: '#',                     // TBD — colar URL do checkout
   // Formato (dependente da turma)
   duration: '3 semanas',
   meetings: '3 aulas ao vivo, semanais',
-  schedule: 'Quartas, 19h30–21h (horário de Brasília)',
+  schedule: 'Quartas, 19h45–21h (horário de Brasília)',
   workload: '4h30 de encontros síncronos',
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
   metaPixelId: '',                      // TBD
-}
-
-const VIDEO_URL: string = ''
-
-const FEATURED_TESTIMONIAL: { quote: string; author: string; role: string } = {
-  quote: '',
-  author: '',
-  role: '',
 }
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
@@ -827,32 +819,16 @@ const TESTIMONIAL_IMAGES = [
     alt: 'Print de depoimento de aluno no WhatsApp 1',
   },
   {
-    src: '/depoimento-2.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 2',
-  },
-  {
     src: '/depoimento-3.webp',
     alt: 'Print de depoimento de aluno no WhatsApp 3',
-  },
-  {
-    src: '/depoimento-4.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 4',
   },
   {
     src: '/depoimento-5.webp',
     alt: 'Print de depoimento de aluno no WhatsApp 5',
   },
   {
-    src: '/depoimento-6.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 6',
-  },
-  {
     src: '/depoimento-7.webp',
     alt: 'Print de depoimento de aluno no WhatsApp 7',
-  },
-  {
-    src: '/depoimento-8.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 8',
   }
 ]
 
@@ -885,65 +861,6 @@ function SignupLink({
     <a href={signupHref()} className={className} onClick={trackInitiateCheckout}>
       {children}
     </a>
-  )
-}
-
-function VideoSection() {
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  return (
-    <section className="eb-video-section">
-      <div className="eb-container eb-container-6xl">
-        <div className="eb-video-grid">
-          <div>
-            <Eyebrow>Assista</Eyebrow>
-            <h2 className="eb-video-title">Noventa segundos de aula.</h2>
-          </div>
-          <div className="eb-video-frame">
-            {!VIDEO_URL ? (
-              <div className="eb-video-soon" aria-label="Vídeo em breve">
-                <span>Trecho de aula — em breve</span>
-              </div>
-            ) : isPlaying ? (
-              <iframe
-                className="eb-video-iframe"
-                src={VIDEO_URL}
-                title="Noventa segundos de aula"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            ) : (
-              <button
-                type="button"
-                className="eb-video-placeholder"
-                aria-label="Reproduzir vídeo"
-                onClick={() => setIsPlaying(true)}
-              >
-                <span className="eb-video-play" aria-hidden />
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function FeaturedTestimonial() {
-  if (!FEATURED_TESTIMONIAL.quote) return null
-
-  return (
-    <section className="eb-featured-testimonial">
-      <div className="eb-container eb-container-6xl">
-        <figure className="eb-featured-quote">
-          <blockquote>{FEATURED_TESTIMONIAL.quote}</blockquote>
-          <figcaption>
-            <strong>{FEATURED_TESTIMONIAL.author}</strong>
-            {FEATURED_TESTIMONIAL.role}
-          </figcaption>
-        </figure>
-      </div>
-    </section>
   )
 }
 
@@ -995,27 +912,31 @@ function Testimonials() {
 const FAQ_ITEMS = [
   {
     q: 'Para quem é este curso?',
-    a: 'Para estudantes e profissionais interessados em compreender a personalidade a partir de psicologia, neurociência, genética comportamental e desenvolvimento humano.',
+    a: 'Para estudantes e profissionais que querem compreender a personalidade a partir de psicologia, genética comportamental e neurociência — sem depender de explicações rasas ou modelos pop.',
   },
   {
     q: 'Preciso ter formação prévia em psicologia?',
-    a: 'Não. O curso parte dos fundamentos, mas mantém densidade suficiente para quem já estuda ou trabalha na área.',
+    a: 'Não. O curso parte dos fundamentos, mas mantém densidade suficiente para quem já estuda ou trabalha na área. O conteúdo foi construído para funcionar nos dois casos.',
   },
   {
     q: 'As aulas ficam gravadas?',
-    a: 'Sim. A turma terá acesso às gravações após os encontros, para rever com calma ou acompanhar caso não possa estar ao vivo.',
+    a: 'Sim. Você terá acesso às gravações após cada encontro, para rever com calma ou acompanhar caso não possa estar ao vivo.',
   },
   {
     q: 'Há material de apoio?',
-    a: 'Sim. Cada aula acompanha material escrito de revisão, organizado para facilitar a retomada dos conceitos principais.',
+    a: 'Sim. Cada aula acompanha material escrito de revisão — organizado para facilitar a retomada dos conceitos sem depender só da memória.',
   },
   {
     q: 'O curso oferece certificado?',
-    a: 'Sim. O certificado de participação fica disponível para quem concluir o percurso dentro da plataforma.',
+    a: 'Sim. O certificado de participação é enviado por e-mail após a conclusão do curso.',
   },
   {
     q: 'Como funciona o pagamento?',
-    a: 'A inscrição é feita online, com pagamento seguro pela Hotmart, podendo ser parcelada no cartão.',
+    a: 'A inscrição é feita online, com pagamento seguro via Mercado Pago. Você pode pagar por PIX, cartão de crédito ou boleto.',
+  },
+  {
+    q: 'As aulas são ao vivo — como acesso?',
+    a: 'Pelo Google Meet. O link é enviado por e-mail após a confirmação do pagamento.',
   },
 ]
 
@@ -1055,9 +976,8 @@ export default function LandingPage() {
                 <Eyebrow>Curso online ao vivo · Psicologia e neurociência</Eyebrow>
                 <h1>Entenda personalidade sem cair em explicação rasa.</h1>
                 <p className="eb-lede">
-                  Um percurso para entender como traços, temperamento, genética,
-                  ambiente e neurodesenvolvimento participam da formação da
-                  personalidade humana.
+                  Um percurso por psicologia, genética comportamental e neurociência
+                  — com rigor conceitual e sem reducionismos.
                 </p>
                 <div className="eb-hero-meta">
                   <span>com <strong>Vicente Cotanda</strong></span>
@@ -1075,36 +995,9 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <aside className="eb-offer-card" aria-label="Resumo da inscrição">
-                <div className="eb-offer-kicker">Próxima turma</div>
-                <div className="eb-offer-rows">
-                  <div className="eb-offer-row">
-                    <span>Início</span>
-                    <strong>{COURSE.startDateLabel}</strong>
-                  </div>
-                  <div className="eb-offer-row">
-                    <span>Formato</span>
-                    <strong>{COURSE.meetings}</strong>
-                  </div>
-                  <div className="eb-offer-row">
-                    <span>Horário</span>
-                    <strong>{COURSE.schedule}</strong>
-                  </div>
-                  <div className="eb-offer-row">
-                    <span>Vagas</span>
-                    <strong>{COURSE.spots}</strong>
-                  </div>
-                </div>
-                <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Garantir vaga</SignupLink>
-                <p className="eb-offer-footnote">
-                  Inclui encontros ao vivo, gravações, material de revisão e certificado.
-                </p>
-              </aside>
             </div>
           </div>
         </section>
-
-        <VideoSection />
 
         {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">
@@ -1116,22 +1009,23 @@ export default function LandingPage() {
               </h2>
               <div className="eb-prose">
                 <p>
-                  Explicações sobre comportamento humano costumam cair em dois extremos: ou reduzem tudo ao cérebro, ou ignoram a biologia como se ela não participasse da vida psicológica. Este curso organiza uma terceira via — sair da pergunta rasa “genes ou ambiente?” e observar como disposições inatas, vínculos, riscos, proteções e maturação cerebral se combinam na trajetória de uma pessoa.
+                  Explicações sobre personalidade costumam cair em dois extremos: ou reduzem tudo ao cérebro e à genética, ou tratam o sujeito como produto exclusivo de suas experiências. Os dois extremos simplificam.
                 </p>
                 <p>
-                  Personalidade como fenômeno estável, mas não fixo; biológico, mas não determinista; individual, mas sempre atravessado por ambiente, cultura e história de vida.
+                  Este curso percorre uma terceira via. A pergunta não é "genes ou ambiente?" — é como esses fatores interagem. Como o temperamento inato se combina com vínculos, traumas, grupos sociais e maturação cerebral para formar padrões relativamente estáveis de emoção, cognição e comportamento.
+                </p>
+                <p>
+                  Personalidade como fenômeno estável, mas não fixo. Biológico, mas não determinista. Individual, mas sempre atravessado por história de vida, cultura e ambiente.
                 </p>
               </div>
             </div>
             <div className="eb-outcomes-label">O que você levará</div>
             <ol className="eb-outcomes">
               {[
-                'Compreender personalidade como padrão relativamente estável de emoções, pensamentos e comportamentos.',
-                'Diferenciar temperamento, personalidade e traços psicológicos sem confundir categorias com dimensões.',
-                'Entender a lógica dos Big Five e por que modelos dimensionais ganharam força na psicologia contemporânea.',
-                'Pensar o debate genética versus ambiente a partir de interações reais, e não de falsas oposições.',
-                'Reconhecer como experiências recorrentes, vínculos, traumas e proteções participam da trajetória de desenvolvimento.',
-                'Integrar cérebro, infância, adolescência, epigenética e ambiente na compreensão da personalidade adulta.',
+                'Saber o que diferencia temperamento, personalidade e traços — e por que confundir essas categorias compromete tanto a pesquisa quanto a clínica.',
+                'Compreender os Big Five não como teste de autoconhecimento, mas como modelo dimensional construído sobre décadas de pesquisa psicométrica — com suas forças e seus limites.',
+                'Pensar o debate genética–ambiente a partir da evidência real: poligenia, estudos com gêmeos, interação gene-ambiente e por que o ambiente também é parcialmente herdado geneticamente.',
+                'Integrar ambiente pré-natal, maturação do córtex pré-frontal, epigenética, adolescência e soma de riscos e proteções numa compreensão coerente da personalidade adulta.',
               ].map((text, i) => (
                 <li key={i}>
                   <span className="eb-outcome-num">0{i + 1}</span>
@@ -1144,39 +1038,7 @@ export default function LandingPage() {
 
         <Divider />
 
-        <FeaturedTestimonial />
-
-        {FEATURED_TESTIMONIAL.quote ? <Divider /> : null}
-
         {/* ── BIO ─────────────────────────────────────────────────────────── */}
-        <section className="eb-section">
-          <div className="eb-container eb-container-6xl">
-            <div className="eb-bio">
-              <aside className="eb-bio-card" aria-label="Credenciais de Vicente Cotanda">
-                <div className="eb-bio-card-label">Quem conduz</div>
-                <strong>Vicente Dall'Igna Cotanda</strong>
-                <ul>
-                  <li>Psicólogo e mestre</li>
-                  <li>Doutorando em Neurociências no InsCer-RS</li>
-                  <li>Pesquisa e ensino com foco em personalidade, comportamento e desenvolvimento</li>
-                </ul>
-              </aside>
-              <div className="eb-bio-text">
-                <div className="eb-bio-label">Sobre quem conduz</div>
-                <h2>Vicente Cotanda.</h2>
-                <div className="eb-prose">
-                  <p>Psicólogo e mestre, Vicente Dall'Igna Cotanda é doutorando em Neurociências no InsCer-RS.</p>
-                  <p>Sua condução combina psicologia da personalidade, genética comportamental, neurodesenvolvimento e clínica, com atenção especial às pontes entre pesquisa empírica e compreensão humana.</p>
-                  <p>O curso preserva esse estilo: rigor conceitual, didática clara e tempo suficiente para que ideias difíceis sejam realmente assimiladas.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── ENCONTROS ───────────────────────────────────────────────────── */}
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
             <div className="eb-section-head">
@@ -1187,9 +1049,9 @@ export default function LandingPage() {
             </div>
             <div className="eb-encontros">
               {[
-                ['Introdução ao estudo da personalidade', 'O que é personalidade, como diferenciar temperamento e traços, por que modelos dimensionais como os Big Five se tornaram centrais e o que está em jogo quando pensamos estabilidade e mudança ao longo da vida.'],
-                ['Genética e ambiente', 'Uma travessia pelo debate nature versus nurture, genética comportamental, estudos com gêmeos, poligenia, eventos biográficos recorrentes e a ideia de que o ambiente também é parcialmente construído pelas disposições do indivíduo.'],
-                ['Cérebro e comportamento', 'Do ambiente pré-natal à adolescência, passando por maturação do córtex pré-frontal, risco, grupos sociais, epigenética e pela soma de riscos e proteções que participa da formação da personalidade adulta.'],
+                ['Introdução ao estudo da personalidade', 'O que é personalidade, como ela se diferencia de temperamento e traços, por que os modelos dimensionais como os Big Five superaram as abordagens categóricas, e o que está em jogo quando pensamos estabilidade e mudança ao longo da vida.'],
+                ['Genética e ambiente', 'Uma travessia pelo debate nature vs. nurture a partir da genética comportamental contemporânea: estudos com gêmeos, poligenia, GWAS, eventos biográficos recorrentes e a ideia — contraintuitiva — de que o ambiente também é parcialmente construído pelas disposições genéticas do indivíduo.'],
+                ['Cérebro e comportamento', 'Do ambiente pré-natal e da exposição hormonal gestacional à maturação tardia do córtex pré-frontal, passando pela adolescência como período de risco e aprendizagem, epigenética, grupos sociais e pela lógica de soma de riscos e proteções que define, em grande parte, a trajetória da personalidade adulta.'],
               ].map(([titulo, desc], i) => (
                 <div key={i} className="eb-encontro">
                   <span className="eb-encontro-num">Encontro 0{i + 1}</span>
@@ -1199,6 +1061,25 @@ export default function LandingPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ── ENCONTROS ───────────────────────────────────────────────────── */}
+        <section className="eb-section">
+          <div className="eb-container eb-container-6xl">
+            <div className="eb-bio">
+              <div className="eb-bio-text">
+                <div className="eb-bio-label">Quem conduz</div>
+                <h2>Vicente Cotanda.</h2>
+                <div className="eb-prose">
+                  <p><strong>Psicólogo · Mestre em filosofia (nature vs. nurture) · Doutorando em neuroimagem · Pesquisador no InsCer-RS</strong></p>
+                  <p>Psicólogo e mestre em filosofia, com pesquisa centrada no debate nature vs. nurture, Vicente Dall'Igna Cotanda é doutorando em neuroimagem e pesquisador no Instituto do Cérebro do RS (InsCer). Seu trabalho transita entre psicologia da personalidade, genética comportamental, neurodesenvolvimento e filosofia da ciência.</p>
+                  <p>O curso reflete esse percurso: rigor conceitual, didática clara e disposição para tratar ideias difíceis com o tempo que elas merecem.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1229,7 +1110,7 @@ export default function LandingPage() {
                     <span>Duração: <strong>{COURSE.duration}</strong></span>
                     <span>Formato: <strong>{COURSE.meetings}</strong></span>
                     <span>Horário: <strong>{COURSE.schedule}</strong></span>
-                    <span>Vagas: <strong>{COURSE.spots}</strong></span>
+                    <span>Vagas: <strong>{COURSE.spots} · Inscrições até 17 de junho</strong></span>
                   </div>
                 </div>
                 <div>
@@ -1245,7 +1126,7 @@ export default function LandingPage() {
                   </ul>
                   <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Quero me inscrever</SignupLink>
                   <p className="eb-guarantee">
-                    Garantia incondicional de 7 dias — pagamento processado pela Hotmart.<br />
+                    Garantia incondicional de 7 dias — pagamento processado via Mercado Pago.<br />
                     Se não for para você, devolvemos integralmente.
                   </p>
                 </div>
@@ -1287,7 +1168,7 @@ export default function LandingPage() {
               <em>{COURSE.startDateLabel}.</em>
             </h2>
             <SignupLink>Quero entrar na turma</SignupLink>
-            <div className="eb-final-cta-vagas">{COURSE.spots} vagas disponíveis</div>
+            <div className="eb-final-cta-vagas">Inscrições abertas até 17 de junho.</div>
           </div>
         </section>
 

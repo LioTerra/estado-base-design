@@ -817,20 +817,32 @@ function trackInitiateCheckout() {
 
 const TESTIMONIAL_IMAGES = [
   {
-    src: '/depoimento-1.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 1',
+    src: '/depoimento-novo-1.jpeg',
+    alt: 'Print de depoimento de alunas no WhatsApp sobre a aula',
   },
   {
-    src: '/depoimento-3.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 3',
+    src: '/depoimento-novo-2.jpeg',
+    alt: 'Print de depoimento de alunas no WhatsApp agradecendo pelo aprendizado',
   },
   {
-    src: '/depoimento-5.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 5',
+    src: '/depoimento-novo-3.jpeg',
+    alt: 'Print de depoimento de aluna no WhatsApp sobre o curso de neurociências',
   },
   {
-    src: '/depoimento-7.webp',
-    alt: 'Print de depoimento de aluno no WhatsApp 7',
+    src: '/depoimento-novo-4.jpeg',
+    alt: 'Print de depoimento de aluna no WhatsApp sobre didática e qualidade do encontro',
+  },
+  {
+    src: '/depoimento-novo-5.jpeg',
+    alt: 'Print de depoimento de aluna no WhatsApp sobre didática e inscrição',
+  },
+  {
+    src: '/depoimento-novo-6.jpeg',
+    alt: 'Print de depoimento de aluna no WhatsApp sobre bibliografia e aproveitamento da aula',
+  },
+  {
+    src: '/depoimento-novo-7.jpeg',
+    alt: 'Print ampliado de depoimento de aluna no WhatsApp sobre a aula',
   }
 ]
 

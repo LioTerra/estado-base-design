@@ -769,7 +769,7 @@ const COURSE = {
   priceLabel: 'R$ 149',                 // TBD — placeholder
   maxInstallments: 12,
   // Link do checkout. Enquanto for '#', o botão só ancora na seção.
-  checkoutUrl: '#',                     // TBD — colar URL do checkout
+  checkoutUrl: 'https://mpago.li/1s8xuTe',
   // Formato (dependente da turma)
   duration: '3 semanas',
   meetings: '3 aulas ao vivo, semanais',
@@ -852,6 +852,12 @@ function signupHref() {
   return COURSE.checkoutUrl === '#' ? '#inscricao' : COURSE.checkoutUrl
 }
 
+function signupTargetProps() {
+  return COURSE.checkoutUrl === '#'
+    ? {}
+    : { target: '_blank', rel: 'noopener' }
+}
+
 function SignupLink({
   children,
   className = 'eb-btn eb-btn-primary',
@@ -860,7 +866,12 @@ function SignupLink({
   className?: string
 }) {
   return (
-    <a href={signupHref()} className={className} onClick={trackInitiateCheckout}>
+    <a
+      href={signupHref()}
+      className={className}
+      onClick={trackInitiateCheckout}
+      {...signupTargetProps()}
+    >
       {children}
     </a>
   )

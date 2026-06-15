@@ -810,10 +810,11 @@ const COURSE = {
   // Vagas
   spots: 40,                            // TBD — placeholder
   // Preço
-  priceLabel: 'R$ 149',                 // TBD — placeholder
-  maxInstallments: 12,
-  // Link do checkout. Enquanto for '#', o botão só ancora na seção.
-  checkoutUrl: 'https://mpago.li/1s8xuTe',
+  priceLabel: 'R$ 1.299,00',
+  installmentLabel: 'em até 9x de R$ 144,33 sem juros',
+  maxInstallments: 9,
+  // Enquanto for '#', CTAs da landing só ancoram na seção de inscrição.
+  checkoutUrl: '#',
   // Formato (dependente da turma)
   duration: '3 semanas',
   meetings: '3 aulas ao vivo, semanais',
@@ -933,6 +934,20 @@ function SignupLink({
   )
 }
 
+function PaymentLink({
+  children,
+  className = 'eb-btn eb-btn-primary',
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <a href="/pagamento" className={className} onClick={trackInitiateCheckout}>
+      {children}
+    </a>
+  )
+}
+
 // ─── Testimonials (with seamless marquee loop) ───────────────────────────────
 
 function VideoSection() {
@@ -1027,7 +1042,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Como funciona o pagamento?',
-    a: 'A inscrição é feita online, com pagamento seguro via Mercado Pago. Você pode pagar por PIX, cartão de crédito ou boleto.',
+    a: 'A inscrição pode ser paga por cartão de crédito via Mercado Pago ou por PIX com desconto falando diretamente pelo WhatsApp.',
   },
   {
     q: 'As aulas são ao vivo — como acesso?',
@@ -1201,7 +1216,7 @@ export default function LandingPage() {
                 <div>
                   <div className="eb-price-label">Valor</div>
                   <div className="eb-price-amount">{COURSE.priceLabel}</div>
-                  <div className="eb-price-installments">ou em até {COURSE.maxInstallments} parcelas no cartão</div>
+                  <div className="eb-price-installments">{COURSE.installmentLabel}</div>
                   <div className="eb-price-meta">
                     <span>Início: <strong>{COURSE.startDateLabel}</strong></span>
                     <span>Duração: <strong>{COURSE.duration}</strong></span>
@@ -1221,7 +1236,7 @@ export default function LandingPage() {
                     <li>Material escrito de revisão</li>
                     <li>Certificado de participação</li>
                   </ul>
-                  <SignupLink className="eb-btn eb-btn-primary eb-btn-wide">Quero me inscrever</SignupLink>
+                  <PaymentLink className="eb-btn eb-btn-primary eb-btn-wide">Inscrever-se</PaymentLink>
                   <p className="eb-guarantee">
                     Garantia incondicional de 7 dias — pagamento processado via Mercado Pago.<br />
                     Se não for para você, devolvemos integralmente.

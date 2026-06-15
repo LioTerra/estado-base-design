@@ -4,7 +4,7 @@ import LandingPage from "@/LandingPage_com_prints_depoimentos";
 
 export const Route = createFileRoute("/sincronos")({
   head: () => {
-    const title = "Curso ao vivo de Personalidade - Estado Base";
+    const title = "Personalidade e Neurociência - Estado Base";
     const description =
       "Curso online ao vivo com Vicente Cotanda sobre personalidade, traços, temperamento, genética, ambiente e neurodesenvolvimento.";
     const url = "https://estado-base-design.leonardoterradarosa.workers.dev/sincronos";

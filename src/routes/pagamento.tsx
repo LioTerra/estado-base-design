@@ -2,14 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const MERCADO_PAGO_URL = "https://mpago.li/1s8xuTe";
 const WHATSAPP_URL =
-  "https://wa.me/5551993545506?text=Ol%C3%A1!%20Quero%20me%20inscrever%20no%20curso%20Personalidade%20(perspectivas%20psico%20e%20neurobiol%C3%B3gicas)%20e%20pagar%20via%20PIX%20com%20o%20desconto%20de%2015%25.";
+  "https://wa.me/5551993545506?text=Ol%C3%A1!%20Quero%20me%20inscrever%20no%20curso%20Personalidade%20e%20Neuroci%C3%AAncia%20e%20pagar%20via%20PIX%20com%20o%20desconto%20de%2015%25.";
 
 export const Route = createFileRoute("/pagamento")({
   head: () => ({
     meta: [
       {
         title:
-          "Pagamento — Personalidade: perspectivas psico e neurobiológicas",
+          "Pagamento — Personalidade e Neurociência",
       },
       {
         name: "description",
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/pagamento")({
       {
         property: "og:title",
         content:
-          "Pagamento — Personalidade: perspectivas psico e neurobiológicas",
+          "Pagamento — Personalidade e Neurociência",
       },
       {
         property: "og:description",
@@ -47,7 +47,7 @@ function PagamentoPage() {
             Inscrição
           </p>
           <h1 className="mt-6 font-serif text-[clamp(38px,6vw,64px)] leading-[1.08]">
-            Personalidade: perspectivas psico e neurobiológicas
+            Personalidade e Neurociência
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
             3 encontros ao vivo · Google Meet · com certificado

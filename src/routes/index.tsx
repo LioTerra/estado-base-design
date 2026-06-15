@@ -5,7 +5,7 @@ import LandingPage from "@/LandingPage_com_prints_depoimentos";
 export const Route = createFileRoute("/")({
   head: () => {
     const title =
-      "Personalidade: perspectivas psico e neurobiológicas — com Vicente Cotanda";
+      "Personalidade e Neurociência — com Vicente Cotanda";
     const description =
       "Curso intensivo online ao vivo. Traços, temperamento, genética, ambiente e " +
       "neurodesenvolvimento na formação da personalidade — sem reducionismos. " +

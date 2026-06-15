@@ -626,7 +626,7 @@ const BRAND_STYLES = `
     gap:     3rem;
     align-items: center;
   }
-  @media (min-width: 900px) { .eb-video-grid { grid-template-columns: 0.8fr 1.2fr; } }
+  @media (min-width: 900px) { .eb-video-grid { grid-template-columns: 1fr; } }
   .eb-video-section .eb-eyebrow { color: var(--primary); }
   .eb-video-section .eb-eyebrow::before { background: var(--primary); }
   .eb-video-title {
@@ -692,6 +692,45 @@ const BRAND_STYLES = `
     border:          1px solid rgba(244,240,234,0.25);
     padding:         0.6rem 1.1rem;
   }
+  .eb-certificate {
+    background: var(--secondary);
+  }
+  .eb-certificate-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    max-width: 58rem;
+  }
+  .eb-certificate-icon {
+    position: relative;
+    width: 3.25rem;
+    height: 4rem;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+    box-shadow: 0 10px 30px rgba(28,26,46,0.08);
+  }
+  .eb-certificate-icon::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 1rem;
+    height: 1rem;
+    border-left: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: var(--secondary);
+  }
+  .eb-certificate h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    margin-bottom: 0.85rem;
+  }
+  .eb-certificate p {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--fg);
+    max-width: 68ch;
+  }
   .eb-proposal-head {
     max-width: 70ch;
     margin-bottom: 4rem;
@@ -755,6 +794,11 @@ const BRAND_STYLES = `
     color:           var(--muted-fg);
   }
   .eb-footer a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .eb-footer-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
 `
 
 // ─── Course config ───────────────────────────────────────────────────────────
@@ -896,10 +940,6 @@ function VideoSection() {
     <section className="eb-video-section" aria-label="Vídeo do curso">
       <div className="eb-container eb-container-6xl">
         <div className="eb-video-grid">
-          <div>
-            <Eyebrow>Vídeo</Eyebrow>
-            <h2 className="eb-video-title">Um espaço para a aula aparecer.</h2>
-          </div>
           <div className="eb-video-frame">
             {VIDEO_URL ? (
               <iframe
@@ -1194,6 +1234,25 @@ export default function LandingPage() {
 
         <Divider />
 
+        {/* ── CERTIFICADO ───────────────────────────────────────────────────── */}
+        <section className="eb-section eb-certificate">
+          <div className="eb-container eb-container-6xl">
+            <div className="eb-certificate-row">
+              <span className="eb-certificate-icon" aria-hidden />
+              <div>
+                <h2>Você sai com certificado.</h2>
+                <p>
+                  Ao concluir os três encontros, você recebe um certificado de participação por e-mail,
+                  emitido em seu nome. Válido para registro em atividades complementares e
+                  desenvolvimento profissional.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
         {/* ── FAQ ─────────────────────────────────────────────────────────── */}
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
@@ -1234,7 +1293,10 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-footer-inner">
               <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
-              <a href="mailto:contato@vicentecotanda.com.br">contato@vicentecotanda.com.br</a>
+              <div className="eb-footer-contact" aria-label="Contato">
+                <a href="mailto:vdcotanda@gmail.com">vdcotanda@gmail.com</a>
+                <a href="tel:+5551993545506">+55 51 99354-5506</a>
+              </div>
               <span>© 2026 Vicente Cotanda Cursos. Todos os direitos reservados.</span>
             </div>
           </div>

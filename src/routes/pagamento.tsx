@@ -14,7 +14,7 @@ export const Route = createFileRoute("/pagamento")({
       {
         name: "description",
         content:
-          "Escolha a forma de pagamento da inscrição: cartão de crédito via Mercado Pago ou PIX com desconto.",
+          "Escolha a forma de pagamento da inscrição: cartão de crédito, boleto ou PIX.",
       },
       {
         property: "og:title",
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/pagamento")({
       {
         property: "og:description",
         content:
-          "Inscrição no curso ao vivo com Vicente Cotanda. Cartão em até 9x ou PIX com desconto.",
+          "Inscrição no curso ao vivo com Vicente Cotanda. Cartão em até 9x, boleto ou PIX com desconto.",
       },
     ],
   }),
@@ -33,8 +33,23 @@ export const Route = createFileRoute("/pagamento")({
 
 function PagamentoPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto w-full max-w-6xl px-6 py-10 md:px-10 md:py-14">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-40 border-b-2 border-accent bg-background/85 py-3 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 md:px-10">
+          <a
+            href="/"
+            className="font-serif text-xl font-medium tracking-[-0.01em] text-foreground no-underline"
+          >
+            Vicente <em className="not-italic text-accent">Cotanda</em>
+          </a>
+          <span className="hidden text-xs uppercase tracking-[0.08em] text-muted-foreground sm:inline">
+            Inscrição
+          </span>
+        </div>
+      </header>
+
+      <main>
+        <section className="mx-auto w-full max-w-6xl px-6 py-10 md:px-10 md:py-14">
         <a
           href="/"
           className="inline-flex text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
@@ -56,10 +71,10 @@ function PagamentoPage() {
 
         <section className="mx-auto mt-12 max-w-3xl border-y border-border py-8 text-center">
           <p className="font-serif text-[clamp(46px,8vw,72px)] leading-none">
-            R$ 1.299,00
+            9x de R$ 144,33
           </p>
           <p className="mt-3 text-base text-muted-foreground">
-            em até 9x de R$ 144,33 sem juros
+            ou R$ 1.299,00 à vista
           </p>
         </section>
 
@@ -73,8 +88,11 @@ function PagamentoPage() {
             cta="Pagar com cartão"
             href={MERCADO_PAGO_URL}
           >
-            <p>Parcele em até 9x de R$ 144,33 sem juros.</p>
-            <p>Pagamento processado com segurança via Mercado Pago.</p>
+            <p>
+              Parcele em até 9x de R$ 144,33 sem juros, ou pague com
+              boleto bancário. Pagamento processado com segurança via
+              Mercado Pago.
+            </p>
           </PaymentCard>
 
           <PaymentCard
@@ -124,8 +142,9 @@ function PagamentoPage() {
             Garantia de 7 dias — devolução integral.
           </p>
         </footer>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }
 

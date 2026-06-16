@@ -300,26 +300,6 @@ const BRAND_STYLES = `
     color:      var(--fg);
   }
 
-  /* ── Outcomes ── */
-  .eb-outcomes { list-style: none; display: grid; gap: 0; }
-  .eb-outcomes li {
-    display:       grid;
-    grid-template-columns: 4rem 1fr;
-    gap:           1.5rem;
-    align-items:   start;
-    padding-block: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .eb-outcomes li:last-child { border-bottom: none; }
-  .eb-outcome-num {
-    font-family:    'Playfair Display', serif;
-    font-size:      13px;
-    letter-spacing: 0.1em;
-    color:          var(--accent);
-    padding-top:    0.2em;
-  }
-  .eb-outcomes li p { font-size: 18px; line-height: 1.55; }
-
   /* ── Bio ── */
   .eb-bio {
     display:    grid;
@@ -615,83 +595,6 @@ const BRAND_STYLES = `
   .eb-final-cta-vagas  { margin-top: 1.5rem; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.55; }
 
   /* ── Brief additions ── */
-  .eb-video-section {
-    background: #0F0E1A;
-    color:      #F4F0EA;
-    padding-block: 5rem;
-  }
-  @media (min-width: 768px) { .eb-video-section { padding-block: 6.5rem; } }
-  .eb-video-grid {
-    display: grid;
-    gap:     3rem;
-    align-items: center;
-  }
-  @media (min-width: 900px) { .eb-video-grid { grid-template-columns: 1fr; } }
-  .eb-video-section .eb-eyebrow { color: var(--primary); }
-  .eb-video-section .eb-eyebrow::before { background: var(--primary); }
-  .eb-video-title {
-    color:        #F4F0EA;
-    font-size:    clamp(32px, 5vw, 52px);
-    margin-top:   1.25rem;
-  }
-  .eb-video-frame {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid rgba(244,240,234,0.24);
-    background: rgba(244,240,234,0.04);
-  }
-  .eb-video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    border: 0;
-    color: #F4F0EA;
-    background: transparent;
-    cursor: pointer;
-  }
-  .eb-video-play {
-    display: grid;
-    place-items: center;
-    width: 4.5rem;
-    height: 4.5rem;
-    border: 1px solid rgba(244,240,234,0.55);
-    border-radius: 999px;
-  }
-  .eb-video-play::before {
-    content: '';
-    display: block;
-    margin-left: 0.25rem;
-    width: 0;
-    height: 0;
-    border-top: 0.55rem solid transparent;
-    border-bottom: 0.55rem solid transparent;
-    border-left: 0.8rem solid currentColor;
-  }
-  .eb-video-iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .eb-video-soon {
-    position:        absolute;
-    inset:           0;
-    display:         flex;
-    align-items:     center;
-    justify-content: center;
-  }
-  .eb-video-soon span {
-    font-size:       12px;
-    letter-spacing:  0.2em;
-    text-transform:  uppercase;
-    color:           rgba(244,240,234,0.55);
-    border:          1px solid rgba(244,240,234,0.25);
-    padding:         0.6rem 1.1rem;
-  }
   .eb-certificate {
     background: var(--secondary);
   }
@@ -741,13 +644,6 @@ const BRAND_STYLES = `
   }
   .eb-proposal-head h2 em {
     color: var(--accent);
-  }
-  .eb-outcomes-label {
-    font-size:      11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color:          var(--muted-fg);
-    margin-bottom:  1.25rem;
   }
   .eb-featured-testimonial {
     padding-block: 5rem;
@@ -811,7 +707,8 @@ const COURSE = {
   spots: 40,                            // TBD — placeholder
   // Preço
   priceLabel: 'R$ 1.299,00',
-  installmentLabel: 'em até 9x de R$ 144,33 sem juros',
+  installmentLabel: '9x de R$ 144,33',
+  cashLabel: 'ou R$ 1.299,00 à vista',
   maxInstallments: 9,
   // Enquanto for '#', CTAs da landing só ancoram na seção de inscrição.
   checkoutUrl: '#',
@@ -823,8 +720,6 @@ const COURSE = {
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
   metaPixelId: '',                      // TBD
 }
-
-const VIDEO_URL = ''
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
 // Não faz nada enquanto COURSE.metaPixelId estiver vazio.
@@ -950,32 +845,6 @@ function PaymentLink({
 
 // ─── Testimonials (with seamless marquee loop) ───────────────────────────────
 
-function VideoSection() {
-  return (
-    <section className="eb-video-section" aria-label="Vídeo do curso">
-      <div className="eb-container eb-container-6xl">
-        <div className="eb-video-grid">
-          <div className="eb-video-frame">
-            {VIDEO_URL ? (
-              <iframe
-                className="eb-video-iframe"
-                src={VIDEO_URL}
-                title="Vídeo do curso"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            ) : (
-              <div className="eb-video-soon" aria-label="Vídeo em breve">
-                <span>Vídeo em breve</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null)
 
@@ -1042,7 +911,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Como funciona o pagamento?',
-    a: 'A inscrição pode ser paga por cartão de crédito via Mercado Pago ou por PIX com desconto falando diretamente pelo WhatsApp.',
+    a: 'A inscrição pode ser paga por cartão de crédito, boleto ou PIX com desconto falando diretamente pelo WhatsApp.',
   },
   {
     q: 'As aulas são ao vivo — como acesso?',
@@ -1109,16 +978,12 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <VideoSection />
-
         {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">
           <div className="eb-container eb-container-6xl">
             <div className="eb-proposal-head">
               <Eyebrow>A proposta</Eyebrow>
-              <h2>
-                Pensar a personalidade <em>sem simplificar o humano.</em>
-              </h2>
+              <h2>Pensar a personalidade sem simplificar o humano.</h2>
               <div className="eb-prose">
                 <p>
                   Explicações sobre personalidade costumam cair em dois extremos: ou reduzem tudo ao cérebro e à genética, ou tratam o sujeito como produto exclusivo de suas experiências. Os dois extremos simplificam.
@@ -1131,20 +996,6 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            <div className="eb-outcomes-label">O que você levará</div>
-            <ol className="eb-outcomes">
-              {[
-                'Saber o que diferencia temperamento, personalidade e traços — e por que confundir essas categorias compromete tanto a pesquisa quanto a clínica.',
-                'Compreender os Big Five não como teste de autoconhecimento, mas como modelo dimensional construído sobre décadas de pesquisa psicométrica — com suas forças e seus limites.',
-                'Pensar o debate genética–ambiente a partir da evidência real: poligenia, estudos com gêmeos, interação gene-ambiente e por que o ambiente também é parcialmente herdado geneticamente.',
-                'Integrar ambiente pré-natal, maturação do córtex pré-frontal, epigenética, adolescência e soma de riscos e proteções numa compreensão coerente da personalidade adulta.',
-              ].map((text, i) => (
-                <li key={i}>
-                  <span className="eb-outcome-num">0{i + 1}</span>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
 
@@ -1161,9 +1012,9 @@ export default function LandingPage() {
             </div>
             <div className="eb-encontros">
               {[
-                ['Introdução ao estudo da personalidade', 'O que é personalidade, como ela se diferencia de temperamento e traços, por que os modelos dimensionais como os Big Five superaram as abordagens categóricas, e o que está em jogo quando pensamos estabilidade e mudança ao longo da vida.'],
-                ['Genética e ambiente', 'Uma travessia pelo debate nature vs. nurture a partir da genética comportamental contemporânea: estudos com gêmeos, poligenia, GWAS, eventos biográficos recorrentes e a ideia — contraintuitiva — de que o ambiente também é parcialmente construído pelas disposições genéticas do indivíduo.'],
-                ['Cérebro e comportamento', 'Do ambiente pré-natal e da exposição hormonal gestacional à maturação tardia do córtex pré-frontal, passando pela adolescência como período de risco e aprendizagem, epigenética, grupos sociais e pela lógica de soma de riscos e proteções que define, em grande parte, a trajetória da personalidade adulta.'],
+                ['O debate nature vs. nurture', 'Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade? Por que algumas pessoas são extrovertidas — adoram festas, shows e multidões — enquanto outras consideram essas situações insuportáveis? Por que algumas são organizadas e disciplinadas, e outras vivem no improviso e procrastinação? Por que algumas atravessam a vida com uma propensão à alegria e resiliência, e outras convivem com uma tristeza quase crônica? Neste encontro, aprenderemos que a ciência contemporânea — especialmente a partir do fim do século XX — nos conduziu a uma concepção amplíssima sobre as forças que moldam a personalidade. Além das experiências de vida, falaremos sobre o efeito de condições pré-natais, como a inflamação durante a gestação; sobre diferenças genéticas e efeitos epigenéticos; e sobre como tudo isso predispõe as crianças a certos tipos de experiência ao longo da vida. O debate nature vs. nurture (natureza vs. criação) é o tema central da nossa aula inaugural.'],
+                ['A mensuração da personalidade e os Big Five', 'No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model). No Big Five, a personalidade é descrita como um conjunto enorme de pequenos traços que se associam em grandes dimensões. Com isso, a discussão conduzida na primeira aula, sobre os efeitos da genética, da epigenética e da criação, será ampliada a partir do emprego dessa ferramenta descritiva oriunda da psicologia. Os cinco grandes fatores serão explicados desde o princípio, para que o aluno tenha total capacidade de interpretar a pesquisa empírica contemporânea e compreender, por conta própria, o raciocínio por trás do modelo mais estabelecido e famoso da área.'],
+                ['Implicações dos traços e suas bases biológicas', 'No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas. Para cada uma das cinco dimensões, analisaremos os mecanismos biológicos subjacentes mais plausíveis — de sistemas de recompensa a circuitos de ameaça — e o que significa, na prática, pontuar muito alto ou muito baixo em cada traço. Assim, a ferramenta descritiva construída na segunda aula ganha profundidade: deixamos de apenas descrever a personalidade para compreender suas raízes e seus efeitos concretos na vida humana. Ao final, exploraremos como outras características conhecidas — como a Dark Triad (narcisismo, o maquiavelismo e a psicopatia) — podem ser entendidas como determinadas configurações dos cinco grandes fatores, fechando o curso com as ferramentas para que o aluno interprete, por conta própria, qualquer perfil de personalidade.'],
               ].map(([titulo, desc], i) => (
                 <div key={i} className="eb-encontro">
                   <span className="eb-encontro-num">Encontro 0{i + 1}</span>
@@ -1215,8 +1066,8 @@ export default function LandingPage() {
               <div className="eb-pricing-grid">
                 <div>
                   <div className="eb-price-label">Valor</div>
-                  <div className="eb-price-amount">{COURSE.priceLabel}</div>
-                  <div className="eb-price-installments">{COURSE.installmentLabel}</div>
+                  <div className="eb-price-amount">{COURSE.installmentLabel}</div>
+                  <div className="eb-price-installments">{COURSE.cashLabel}</div>
                   <div className="eb-price-meta">
                     <span>Início: <strong>{COURSE.startDateLabel}</strong></span>
                     <span>Duração: <strong>{COURSE.duration}</strong></span>
@@ -1228,7 +1079,8 @@ export default function LandingPage() {
                 <div>
                   <p className="eb-price-includes">
                     Você entra para uma turma ao vivo, acompanha as aulas com Vicente
-                    e recebe o material para revisar depois sem depender só da memória.
+                    e recebe o material para revisar depois. Pagamento por cartão de crédito,
+                    boleto ou PIX.
                   </p>
                   <ul className="eb-price-checklist">
                     <li>{COURSE.meetings}</li>

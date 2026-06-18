@@ -353,6 +353,13 @@ const BRAND_STYLES = `
     margin-bottom:  1rem;
   }
   .eb-bio-text h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 1.75rem; }
+  .eb-bio-text {
+    text-align: center;
+  }
+  .eb-bio-text .eb-prose {
+    margin-inline: auto;
+    text-align: center;
+  }
   .eb-bio-card {
     border:     1px solid var(--border);
     background: var(--secondary);

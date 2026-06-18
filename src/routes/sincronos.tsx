@@ -4,7 +4,8 @@ import LandingPage from "@/LandingPage_com_prints_depoimentos";
 
 export const Route = createFileRoute("/sincronos")({
   head: () => {
-    const title = "Personalidade e Neurociência - Estado Base";
+    const title =
+      "Curso On-line Sobre Personalidade, Neurociência e o Modelo dos Cinco Grandes Fatores (Big Five Model)";
     const description =
       "Curso online ao vivo com Vicente Cotanda sobre personalidade, traços, temperamento, genética, ambiente e neurodesenvolvimento.";
     const url = "https://estado-base-design.leonardoterradarosa.workers.dev/sincronos";
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/sincronos")({
         { property: "og:image:height", content: "630" },
         { property: "og:locale", content: "pt_BR" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
         { name: "twitter:image", content: ogImage },
       ],
     };

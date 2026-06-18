@@ -5,7 +5,7 @@ import LandingPage from "@/LandingPage_com_prints_depoimentos";
 export const Route = createFileRoute("/")({
   head: () => {
     const title =
-      "Personalidade e Neurociência — com Vicente Cotanda";
+      "Curso On-line Sobre Personalidade, Neurociência e o Modelo dos Cinco Grandes Fatores (Big Five Model)";
     const description =
       "Curso intensivo online ao vivo. Traços, temperamento, genética, ambiente e " +
       "neurodesenvolvimento na formação da personalidade — sem reducionismos. " +
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/")({
         { property: "og:image:height", content: "630" },
         { property: "og:locale", content: "pt_BR" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
         { name: "twitter:image", content: ogImage },
       ],
     };

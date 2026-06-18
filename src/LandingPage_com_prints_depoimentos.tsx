@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import certificateModel from './assets/certificado-modelo.webp'
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
 // Add these to your globals.css / styles.css under :root if you prefer;
@@ -120,17 +121,22 @@ const BRAND_STYLES = `
   .eb-topbar-link:hover { color: var(--accent); }
 
   /* ── Hero ── */
-  .eb-hero { padding-block: 5rem 4.5rem; }
-  @media (min-width: 768px) { .eb-hero { padding-block: 7rem 5.5rem; } }
+  .eb-hero { padding-block: 4rem 4.5rem; }
+  @media (min-width: 768px) { .eb-hero { padding-block: 4rem 5rem; } }
   .eb-hero-grid {
     display: grid;
     gap:     3rem;
     align-items: center;
   }
   @media (min-width: 960px) {
-    .eb-hero-grid { max-width: 56rem; }
+    .eb-hero-grid { max-width: 64rem; }
   }
-  .eb-hero h1 { font-size: clamp(40px, 7vw, 68px); margin-block: 1.5rem 1.25rem; }
+  .eb-section h2,
+  .eb-testimonials-section h2,
+  .eb-final-cta h2 {
+    text-transform: uppercase;
+  }
+  .eb-hero h1 { font-size: clamp(36px, 5vw, 58px); margin-block: 1.5rem 1.25rem; }
   .eb-hero h1 em { color: var(--accent); }
   .eb-lede {
     font-size:    19px;
@@ -376,7 +382,7 @@ const BRAND_STYLES = `
   .eb-formato-row:first-child { border-top: 1px solid var(--border); }
   .eb-formato-row dt { color: var(--muted-fg); font-size: 13px; }
 
-  /* ── Encontros ── */
+  /* ── Aulas ── */
   .eb-encontros { display: grid; gap: 0; }
   .eb-encontro {
     display:       grid;
@@ -388,7 +394,15 @@ const BRAND_STYLES = `
   .eb-encontro:first-child { border-top: 1px solid var(--border); }
   .eb-encontro-num { font-size: 12px; letter-spacing: 0.12em; color: var(--muted-fg); padding-top: 0.3em; }
   .eb-encontro h3  { font-size: 20px; font-weight: 500; margin-bottom: 0.75rem; }
-  .eb-encontro p   { font-size: 15px; color: var(--muted-fg); line-height: 1.55; }
+  .eb-encontro p   { font-size: 15px; color: var(--muted-fg); line-height: 1.65; }
+  .eb-encontro p + p { margin-top: 1rem; }
+  @media (max-width: 640px) {
+    .eb-encontro {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding-block: 2rem;
+    }
+  }
 
   /* ── Testimonials marquee ── */
   .eb-testimonials-section {
@@ -600,29 +614,14 @@ const BRAND_STYLES = `
   }
   .eb-certificate-row {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.25rem;
-    align-items: start;
-    max-width: 58rem;
+    gap: 2.5rem;
+    align-items: center;
   }
-  .eb-certificate-icon {
-    position: relative;
-    width: 3.25rem;
-    height: 4rem;
-    border: 1px solid var(--accent);
-    background: var(--bg);
-    box-shadow: 0 10px 30px rgba(28,26,46,0.08);
-  }
-  .eb-certificate-icon::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    width: 1rem;
-    height: 1rem;
-    border-left: 1px solid var(--accent);
-    border-bottom: 1px solid var(--accent);
-    background: var(--secondary);
+  @media (min-width: 800px) {
+    .eb-certificate-row {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.78fr);
+      gap: 4rem;
+    }
   }
   .eb-certificate h2 {
     font-size: clamp(28px, 4vw, 40px);
@@ -633,6 +632,21 @@ const BRAND_STYLES = `
     line-height: 1.65;
     color: var(--fg);
     max-width: 68ch;
+  }
+  .eb-certificate-figure { margin: 0; }
+  .eb-certificate-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 40px rgba(28,26,46,0.14);
+  }
+  .eb-certificate-caption {
+    margin-top: 0.7rem;
+    font-size: 12px;
+    color: var(--muted-fg);
+    text-align: center;
   }
   .eb-proposal-head {
     max-width: 70ch;
@@ -701,10 +715,10 @@ const BRAND_STYLES = `
 // Única fonte de verdade para dados da turma. Quando os dados reais chegarem,
 // edite SOMENTE aqui — nada mais no arquivo precisa mudar.
 const COURSE = {
-  // Data de início da turma (label exibida na página)
-  startDateLabel: '18 de junho',        // TBD — placeholder
-  // Vagas
-  spots: 40,                            // TBD — placeholder
+  title: 'Curso On-line Sobre Personalidade, Neurociência e o Modelo dos Cinco Grandes Fatores (Big Five Model)',
+  datesLabel: '12, 19 e 26 de agosto',
+  registrationDeadline: '11 de agosto',
+  spotsLabel: 'vagas limitadas',
   // Preço
   priceLabel: 'R$ 1.299,00',
   installmentLabel: '9x de R$ 144,33',
@@ -720,6 +734,38 @@ const COURSE = {
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
   metaPixelId: '',                      // TBD
 }
+
+const LESSONS = [
+  {
+    label: 'Aula 1 — 12 de agosto',
+    title: 'O debate nature vs. nurture',
+    paragraphs: [
+      'Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade?',
+      'Por que algumas pessoas são extrovertidas — adoram festas, shows e multidões — enquanto outras consideram essas situações insuportáveis? Por que algumas são organizadas e disciplinadas, e outras vivem no improviso e procrastinação? Por que algumas atravessam a vida com uma propensão à alegria e resiliência, e outras convivem com uma tristeza quase crônica?',
+      'Neste encontro, aprenderemos que a ciência contemporânea — especialmente a partir do fim do século XX — nos conduziu a uma concepção amplíssima sobre as forças que moldam a personalidade. Além das experiências de vida, falaremos sobre o efeito de condições pré-natais, como a inflamação durante a gestação; sobre diferenças genéticas e efeitos epigenéticos; e sobre como tudo isso predispõe as crianças a certos tipos de experiência ao longo da vida.',
+      'O debate nature vs. nurture (natureza vs. criação) é o tema central da nossa aula inaugural.',
+    ],
+  },
+  {
+    label: 'Aula 2 — 19 de agosto',
+    title: 'A mensuração da personalidade e os Big Five',
+    paragraphs: [
+      'No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model).',
+      'No Big Five, a personalidade é descrita como um conjunto enorme de pequenos traços que se associam em grandes dimensões. Com isso, a discussão conduzida na primeira aula, sobre os efeitos da genética, da epigenética e da criação, será ampliada a partir do emprego dessa ferramenta descritiva oriunda da psicologia.',
+      'Os cinco grandes fatores serão explicados desde o princípio, para que o aluno tenha total capacidade de interpretar a pesquisa empírica contemporânea e compreender, por conta própria, o raciocínio por trás do modelo mais estabelecido e famoso da área.',
+    ],
+  },
+  {
+    label: 'Aula 3 — 26 de agosto',
+    title: 'Implicações dos traços e suas bases biológicas',
+    paragraphs: [
+      'No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas.',
+      'Para cada uma das cinco dimensões, analisaremos os mecanismos biológicos subjacentes mais plausíveis — de sistemas de recompensa a circuitos de ameaça — e o que significa, na prática, pontuar muito alto ou muito baixo em cada traço.',
+      'Assim, a ferramenta descritiva construída na segunda aula ganha profundidade: deixamos de apenas descrever a personalidade para compreender suas raízes e seus efeitos concretos na vida humana.',
+      'Ao final, exploraremos como outras características conhecidas — como a Dark Triad (narcisismo, maquiavelismo e psicopatia) — podem ser entendidas como determinadas configurações dos cinco grandes fatores, fechando o curso com as ferramentas para que o aluno interprete, por conta própria, qualquer perfil de personalidade.',
+    ],
+  },
+]
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
 // Não faz nada enquanto COURSE.metaPixelId estiver vazio.
@@ -865,7 +911,7 @@ function Testimonials() {
       <div className="eb-container eb-container-6xl">
         <div className="eb-section-head">
           <Eyebrow>Quem já estudou</Eyebrow>
-          <h2 style={{ marginTop: '1.5rem' }}>Sobre a experiência.</h2>
+          <h2 style={{ marginTop: '1.5rem' }}>Depoimentos de alunos</h2>
         </div>
       </div>
       <div className="eb-testimonials-viewport">
@@ -953,17 +999,17 @@ export default function LandingPage() {
             <div className="eb-hero-grid">
               <div>
                 <Eyebrow>Curso online ao vivo · Psicologia e neurociência</Eyebrow>
-                <h1>Entenda personalidade sem cair em explicação rasa.</h1>
+                <h1>{COURSE.title}</h1>
                 <p className="eb-lede">
                   Um percurso por psicologia, genética comportamental e neurociência
-                  — com rigor conceitual e sem reducionismos.
+                  — com rigor conceitual, aulas atualizadas e exemplos cotidianos.
                 </p>
                 <div className="eb-hero-meta">
-                  <span>com <strong>Vicente Cotanda</strong></span>
+                  <span><strong>Ministrado por Prof. Vicente Cotanda</strong></span>
                   <span className="eb-dot" aria-hidden>·</span>
-                  <span>começa em <strong>{COURSE.startDateLabel}</strong></span>
+                  <span><strong>{COURSE.datesLabel}</strong></span>
                   <span className="eb-dot" aria-hidden>·</span>
-                  <span><strong>{COURSE.spots}</strong> vagas</span>
+                  <span><strong>{COURSE.spotsLabel}</strong></span>
                 </div>
                 <div className="eb-hero-actions">
                   <SignupLink>Quero entrar na turma</SignupLink>
@@ -978,49 +1024,22 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── A PROPOSTA ──────────────────────────────────────────────────── */}
+        {/* ── PROGRAMAÇÃO ─────────────────────────────────────────────────── */}
         <section className="eb-section" id="conteudo">
           <div className="eb-container eb-container-6xl">
-            <div className="eb-proposal-head">
-              <Eyebrow>A proposta</Eyebrow>
-              <h2>Pensar a personalidade sem simplificar o humano.</h2>
-              <div className="eb-prose">
-                <p>
-                  Explicações sobre personalidade costumam cair em dois extremos: ou reduzem tudo ao cérebro e à genética, ou tratam o sujeito como produto exclusivo de suas experiências. Os dois extremos simplificam.
-                </p>
-                <p>
-                  Este curso percorre uma terceira via. A pergunta não é "genes ou ambiente?" — é como esses fatores interagem. Como o temperamento inato se combina com vínculos, traumas, grupos sociais e maturação cerebral para formar padrões relativamente estáveis de emoção, cognição e comportamento.
-                </p>
-                <p>
-                  Personalidade como fenômeno estável, mas não fixo. Biológico, mas não determinista. Individual, mas sempre atravessado por história de vida, cultura e ambiente.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── BIO ─────────────────────────────────────────────────────────── */}
-        <section className="eb-section">
-          <div className="eb-container eb-container-6xl">
             <div className="eb-section-head">
-              <Eyebrow>Os encontros</Eyebrow>
-              <h2 style={{ marginTop: '1.5rem' }}>
-                O caminho <em>encontro a encontro.</em>
-              </h2>
+              <Eyebrow>Programação</Eyebrow>
+              <h2 style={{ marginTop: '1.5rem' }}>A programação das aulas</h2>
             </div>
             <div className="eb-encontros">
-              {[
-                ['O debate nature vs. nurture', 'Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade? Por que algumas pessoas são extrovertidas — adoram festas, shows e multidões — enquanto outras consideram essas situações insuportáveis? Por que algumas são organizadas e disciplinadas, e outras vivem no improviso e procrastinação? Por que algumas atravessam a vida com uma propensão à alegria e resiliência, e outras convivem com uma tristeza quase crônica? Neste encontro, aprenderemos que a ciência contemporânea — especialmente a partir do fim do século XX — nos conduziu a uma concepção amplíssima sobre as forças que moldam a personalidade. Além das experiências de vida, falaremos sobre o efeito de condições pré-natais, como a inflamação durante a gestação; sobre diferenças genéticas e efeitos epigenéticos; e sobre como tudo isso predispõe as crianças a certos tipos de experiência ao longo da vida. O debate nature vs. nurture (natureza vs. criação) é o tema central da nossa aula inaugural.'],
-                ['A mensuração da personalidade e os Big Five', 'No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model). No Big Five, a personalidade é descrita como um conjunto enorme de pequenos traços que se associam em grandes dimensões. Com isso, a discussão conduzida na primeira aula, sobre os efeitos da genética, da epigenética e da criação, será ampliada a partir do emprego dessa ferramenta descritiva oriunda da psicologia. Os cinco grandes fatores serão explicados desde o princípio, para que o aluno tenha total capacidade de interpretar a pesquisa empírica contemporânea e compreender, por conta própria, o raciocínio por trás do modelo mais estabelecido e famoso da área.'],
-                ['Implicações dos traços e suas bases biológicas', 'No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas. Para cada uma das cinco dimensões, analisaremos os mecanismos biológicos subjacentes mais plausíveis — de sistemas de recompensa a circuitos de ameaça — e o que significa, na prática, pontuar muito alto ou muito baixo em cada traço. Assim, a ferramenta descritiva construída na segunda aula ganha profundidade: deixamos de apenas descrever a personalidade para compreender suas raízes e seus efeitos concretos na vida humana. Ao final, exploraremos como outras características conhecidas — como a Dark Triad (narcisismo, o maquiavelismo e a psicopatia) — podem ser entendidas como determinadas configurações dos cinco grandes fatores, fechando o curso com as ferramentas para que o aluno interprete, por conta própria, qualquer perfil de personalidade.'],
-              ].map(([titulo, desc], i) => (
-                <div key={i} className="eb-encontro">
-                  <span className="eb-encontro-num">Encontro 0{i + 1}</span>
+              {LESSONS.map((lesson) => (
+                <div key={lesson.label} className="eb-encontro">
+                  <span className="eb-encontro-num">{lesson.label}</span>
                   <div>
-                    <h3>{titulo}</h3>
-                    <p>{desc}</p>
+                    <h3>{lesson.title}</h3>
+                    {lesson.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -1069,11 +1088,11 @@ export default function LandingPage() {
                   <div className="eb-price-amount">{COURSE.installmentLabel}</div>
                   <div className="eb-price-installments">{COURSE.cashLabel}</div>
                   <div className="eb-price-meta">
-                    <span>Início: <strong>{COURSE.startDateLabel}</strong></span>
+                    <span>Datas: <strong>{COURSE.datesLabel}</strong></span>
                     <span>Duração: <strong>{COURSE.duration}</strong></span>
                     <span>Formato: <strong>{COURSE.meetings}</strong></span>
                     <span>Horário: <strong>{COURSE.schedule}</strong></span>
-                    <span>Vagas: <strong>{COURSE.spots} · Inscrições até 17 de junho</strong></span>
+                    <span>Vagas: <strong>{COURSE.spotsLabel} · Inscrições até {COURSE.registrationDeadline}</strong></span>
                   </div>
                 </div>
                 <div>
@@ -1105,15 +1124,25 @@ export default function LandingPage() {
         <section className="eb-section eb-certificate">
           <div className="eb-container eb-container-6xl">
             <div className="eb-certificate-row">
-              <span className="eb-certificate-icon" aria-hidden />
               <div>
-                <h2>Você sai com certificado.</h2>
+                <h2>Você sai com certificado</h2>
                 <p>
-                  Ao concluir os três encontros, você recebe um certificado de participação por e-mail,
-                  emitido em seu nome. Válido para registro em atividades complementares e
-                  desenvolvimento profissional.
+                  Ao concluir as três aulas, você recebe um certificado de conclusão por e-mail,
+                  emitido em seu nome, com carga horária de 6 horas. Válido para registro em
+                  atividades complementares e desenvolvimento profissional.
                 </p>
               </div>
+              <figure className="eb-certificate-figure">
+                <img
+                  className="eb-certificate-image"
+                  src={certificateModel}
+                  alt="Modelo do certificado de conclusão do curso"
+                  loading="lazy"
+                />
+                <figcaption className="eb-certificate-caption">
+                  Modelo ilustrativo do certificado.
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
@@ -1147,11 +1176,11 @@ export default function LandingPage() {
           <div className="eb-container eb-container-3xl">
             <p className="eb-final-cta-eyebrow">Próxima turma confirmada:</p>
             <h2>
-              As aulas começam em<br />
-              <em>{COURSE.startDateLabel}.</em>
+              Aulas em<br />
+              <em>{COURSE.datesLabel}.</em>
             </h2>
             <SignupLink>Quero entrar na turma</SignupLink>
-            <div className="eb-final-cta-vagas">Inscrições abertas até 17 de junho.</div>
+            <div className="eb-final-cta-vagas">Inscrições abertas até {COURSE.registrationDeadline}.</div>
           </div>
         </section>
 

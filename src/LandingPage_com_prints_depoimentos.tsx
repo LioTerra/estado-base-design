@@ -142,7 +142,11 @@ const BRAND_STYLES = `
     text-transform: uppercase;
   }
   .eb-hero h1 { font-size: clamp(36px, 5vw, 58px); margin-block: 1.5rem 1.25rem; }
-  .eb-hero h1 em { color: var(--accent); }
+  .eb-hero h1 strong { font-weight: 700; }
+  .eb-hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+  }
   .eb-lede {
     font-size:    19px;
     line-height:  1.6;
@@ -1011,7 +1015,11 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-hero-grid">
               <div>
-                <h1>{COURSE.title}</h1>
+                <h1>
+                  Personalidade, Neurociência e o Modelo dos{' '}
+                  <strong>Cinco Grandes Fatores</strong>{' '}
+                  <em>(Big Five Model)</em>
+                </h1>
                 <p className="eb-lede">
                   Um percurso por psicologia, genética comportamental e neurociência
                   — com rigor conceitual, aulas atualizadas e exemplos cotidianos.

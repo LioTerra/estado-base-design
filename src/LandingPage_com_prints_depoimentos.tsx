@@ -169,6 +169,19 @@ const BRAND_STYLES = `
     gap:         0.9rem;
     align-items: center;
   }
+  @media (min-width: 768px) {
+    .eb-hero-grid {
+      margin-inline: auto;
+      text-align: center;
+    }
+    .eb-lede {
+      margin-inline: auto;
+    }
+    .eb-hero-meta,
+    .eb-hero-actions {
+      justify-content: center;
+    }
+  }
   .eb-hero-note {
     font-size: 13px;
     color:     var(--muted-fg);

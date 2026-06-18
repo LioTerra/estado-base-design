@@ -30,11 +30,12 @@ const BRAND_STYLES = `
 
   .eb-lp h1, .eb-lp h2, .eb-lp h3 {
     font-family:    'Playfair Display', ui-serif, Georgia, serif;
-    font-weight:    500;
+    font-weight:    400;
     letter-spacing: -0.015em;
     line-height:    1.15;
     color:          var(--fg);
   }
+  .eb-lp h2 { text-align: center; }
 
   /* ── Layout ── */
   .eb-container   { width: 100%; margin-inline: auto; padding-inline: 1.5rem; }
@@ -89,7 +90,7 @@ const BRAND_STYLES = `
   .eb-wordmark {
     font-family:    'Playfair Display', serif;
     font-size:      20px;
-    font-weight:    500;
+    font-weight:    400;
     letter-spacing: -0.01em;
     color:          var(--fg);
   }
@@ -393,7 +394,7 @@ const BRAND_STYLES = `
   }
   .eb-encontro:first-child { border-top: 1px solid var(--border); }
   .eb-encontro-num { font-size: 12px; letter-spacing: 0.12em; color: var(--muted-fg); padding-top: 0.3em; }
-  .eb-encontro h3  { font-size: 20px; font-weight: 500; margin-bottom: 0.75rem; }
+  .eb-encontro h3  { font-size: 20px; font-weight: 400; margin-bottom: 0.75rem; }
   .eb-encontro p   { font-size: 15px; color: var(--muted-fg); line-height: 1.65; }
   .eb-encontro p + p { margin-top: 1rem; }
   @media (max-width: 640px) {
@@ -543,6 +544,11 @@ const BRAND_STYLES = `
     margin-bottom:3rem;
   }
   .eb-pricing-wrap h2 em { color: var(--accent); }
+  .eb-pricing-wrap h2 em {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
   .eb-pricing-grid {
     display:   grid;
     gap:       3rem;
@@ -550,7 +556,7 @@ const BRAND_STYLES = `
   }
   @media (min-width: 640px) { .eb-pricing-grid { grid-template-columns: 1fr 1fr; } }
   .eb-price-label      { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: 0.5rem; }
-  .eb-price-amount     { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 500; letter-spacing: -0.02em; }
+  .eb-price-amount     { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 400; letter-spacing: -0.02em; }
   .eb-price-installments { font-size: 14px; color: var(--muted-fg); margin-top: 0.5rem; }
   .eb-price-includes   { font-size: 15px; color: var(--muted-fg); margin-bottom: 1.75rem; line-height: 1.55; }
   .eb-price-secure     { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-top: 0.75rem; }
@@ -975,9 +981,6 @@ export default function LandingPage() {
       {/* Scoped styles — move to globals.css if you prefer */}
       <style dangerouslySetInnerHTML={{ __html: BRAND_STYLES }} />
 
-      {/* Google Fonts — add to your <head> / layout if not already there */}
-      <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');` }} />
-
       <div className="eb-lp">
 
         {/* ── TOP BAR ─────────────────────────────────────────────────────── */}
@@ -998,7 +1001,6 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-hero-grid">
               <div>
-                <Eyebrow>Curso online ao vivo · Psicologia e neurociência</Eyebrow>
                 <h1>{COURSE.title}</h1>
                 <p className="eb-lede">
                   Um percurso por psicologia, genética comportamental e neurociência

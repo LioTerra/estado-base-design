@@ -1090,10 +1090,7 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-pricing-wrap">
               <div className="eb-pricing-label">Inscrição</div>
-              <h2>
-                Entre na próxima turma<br />
-                <em>com tudo organizado.</em>
-              </h2>
+              <h2>Entre na próxima turma</h2>
               <div className="eb-pricing-grid">
                 <div>
                   <div className="eb-price-label">Valor</div>

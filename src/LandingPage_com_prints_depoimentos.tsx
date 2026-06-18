@@ -45,6 +45,10 @@ const BRAND_STYLES = `
 
   .eb-section { padding-block: 6rem; }
   @media (min-width: 768px) { .eb-section { padding-block: 8rem; } }
+  .eb-section,
+  .eb-testimonials-section {
+    scroll-margin-top: 5rem;
+  }
 
   .eb-divider { height: 1px; background: var(--border); }
 
@@ -556,7 +560,13 @@ const BRAND_STYLES = `
   }
   @media (min-width: 640px) { .eb-pricing-grid { grid-template-columns: 1fr 1fr; } }
   .eb-price-label      { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: 0.5rem; }
-  .eb-price-amount     { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 400; letter-spacing: -0.02em; }
+  .eb-price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 10vw, 48px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
   .eb-price-installments { font-size: 14px; color: var(--muted-fg); margin-top: 0.5rem; }
   .eb-price-includes   { font-size: 15px; color: var(--muted-fg); margin-bottom: 1.75rem; line-height: 1.55; }
   .eb-price-secure     { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-top: 0.75rem; }

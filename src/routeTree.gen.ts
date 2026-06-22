@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SincronosRouteImport } from './routes/sincronos'
 import { Route as PagamentoRouteImport } from './routes/pagamento'
+import { Route as ObrigadoRouteImport } from './routes/obrigado'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiCreatePreferenceRouteImport } from './routes/api/create-preference'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -29,44 +31,81 @@ const PagamentoRoute = PagamentoRouteImport.update({
   path: '/pagamento',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObrigadoRoute = ObrigadoRouteImport.update({
+  id: '/obrigado',
+  path: '/obrigado',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCreatePreferenceRoute = ApiCreatePreferenceRouteImport.update({
+  id: '/api/create-preference',
+  path: '/api/create-preference',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/obrigado': typeof ObrigadoRoute
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
+  '/api/create-preference': typeof ApiCreatePreferenceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/obrigado': typeof ObrigadoRoute
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
+  '/api/create-preference': typeof ApiCreatePreferenceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/obrigado': typeof ObrigadoRoute
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
+  '/api/create-preference': typeof ApiCreatePreferenceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pagamento' | '/sincronos' | '/sobre'
+  fullPaths:
+    | '/'
+    | '/obrigado'
+    | '/pagamento'
+    | '/sincronos'
+    | '/sobre'
+    | '/api/create-preference'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pagamento' | '/sincronos' | '/sobre'
-  id: '__root__' | '/' | '/pagamento' | '/sincronos' | '/sobre'
+  to:
+    | '/'
+    | '/obrigado'
+    | '/pagamento'
+    | '/sincronos'
+    | '/sobre'
+    | '/api/create-preference'
+  id:
+    | '__root__'
+    | '/'
+    | '/obrigado'
+    | '/pagamento'
+    | '/sincronos'
+    | '/sobre'
+    | '/api/create-preference'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ObrigadoRoute: typeof ObrigadoRoute
   PagamentoRoute: typeof PagamentoRoute
   SincronosRoute: typeof SincronosRoute
   SobreRoute: typeof SobreRoute
+  ApiCreatePreferenceRoute: typeof ApiCreatePreferenceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PagamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obrigado': {
+      id: '/obrigado'
+      path: '/obrigado'
+      fullPath: '/obrigado'
+      preLoaderRoute: typeof ObrigadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -99,14 +145,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/create-preference': {
+      id: '/api/create-preference'
+      path: '/api/create-preference'
+      fullPath: '/api/create-preference'
+      preLoaderRoute: typeof ApiCreatePreferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ObrigadoRoute: ObrigadoRoute,
   PagamentoRoute: PagamentoRoute,
   SincronosRoute: SincronosRoute,
   SobreRoute: SobreRoute,
+  ApiCreatePreferenceRoute: ApiCreatePreferenceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

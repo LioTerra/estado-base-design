@@ -344,10 +344,16 @@ const BRAND_STYLES = `
   /* ── Bio ── */
   .eb-bio {
     display:    grid;
-    gap:        4rem;
-    align-items:start;
+    gap:        3rem;
+    align-items:center;
+    justify-items: center;
   }
-  @media (min-width: 768px) { .eb-bio { grid-template-columns: 1fr; } }
+  @media (min-width: 800px) {
+    .eb-bio {
+      grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1fr);
+      justify-items: stretch;
+    }
+  }
   .eb-bio-photo {
     aspect-ratio:  3/4;
     background:    var(--secondary);
@@ -381,52 +387,49 @@ const BRAND_STYLES = `
     text-align: center;
     margin: -0.75rem auto 2.5rem;
   }
-  .eb-affiliations {
-    display: grid;
-    gap: 1rem;
-    max-width: 52rem;
-    margin: 0 auto 2.5rem;
+  .eb-professor-photo {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 9999px;
+    border: 2px solid var(--border);
+    object-fit: cover;
+    object-position: center top;
   }
-  @media (min-width: 700px) {
-    .eb-affiliations { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 799px) {
+    .eb-professor-photo {
+      width: 11rem;
+      height: 11rem;
+    }
   }
-  .eb-affiliation {
-    border-block: 1px solid var(--border);
-    padding-block: 1.25rem;
-    text-align: center;
+  .eb-professor-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto 1.75rem;
   }
-  .eb-affiliation strong {
-    display: block;
-    font-family: 'Playfair Display', ui-serif, Georgia, serif;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 0.35rem;
+  .eb-professor-badge {
+    border: 1px solid var(--border);
+    padding: 0.125rem 0.5rem;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
   }
-  .eb-affiliation span { font-size: 14px; color: var(--muted-fg); }
-  .eb-professor-list {
-    list-style: none;
-    display: grid;
-    gap: 1rem;
-    max-width: 52rem;
-    margin: 0 auto 2.5rem;
-    text-align: left;
-  }
-  .eb-professor-list li {
-    position: relative;
-    padding-left: 1.25rem;
+  .eb-professor-copy {
+    max-width: 58ch;
+    margin: 0 auto 2rem;
     font-size: 16px;
-    line-height: 1.65;
-  }
-  .eb-professor-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--primary);
+    line-height: 1.7;
+    color: var(--fg);
+    text-align: left;
   }
   .eb-professor-stat {
     text-align: center;
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
-    font-size: clamp(34px, 5vw, 52px);
+    font-size: 2rem;
     color: var(--primary);
   }
   .eb-professor-stat span {
@@ -530,13 +533,14 @@ const BRAND_STYLES = `
   /* ── Testimonials marquee ── */
   .eb-testimonials-section {
     position:   relative;
-    padding:    1rem 0 2rem;
+    padding:    0 0 1rem;
     background: linear-gradient(180deg, var(--bg) 0%, var(--secondary) 45%, var(--bg) 100%);
   }
+  .eb-testimonials-section .eb-section-head { margin-bottom: 1rem; }
   .eb-testimonials-viewport {
     position:    relative;
     overflow:    hidden;
-    padding:     3rem 0;
+    padding:     1.5rem 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
             mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
   }
@@ -634,14 +638,14 @@ const BRAND_STYLES = `
   .eb-testimonial-image {
     display:       block;
     width:         100%;
-    height:        540px;
+    height:        440px;
     object-fit:    contain;
     border-radius: 12px;
     background:    #101818;
   }
   @media (max-width: 480px) {
     .eb-testimonial { flex: 0 0 270px; padding: 0.5rem; }
-    .eb-testimonial-image { height: 500px; }
+    .eb-testimonial-image { height: 430px; }
   }
 
   /* ── Pricing ── */
@@ -1245,38 +1249,33 @@ export default function LandingPage() {
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
             <div className="eb-bio">
+              <img
+                src="/vicente-foto.jpg"
+                alt="Prof. Me. Vicente Cotanda"
+                className="eb-professor-photo"
+              />
               <div className="eb-bio-text">
                 <div className="eb-bio-label">Sobre o professor</div>
                 <h2>Prof. Me. Vicente Cotanda</h2>
                 <p className="eb-professor-subtitle">
                   Pesquisador em psicologia, genética comportamental e neuroimagem
                 </p>
-                <div className="eb-affiliations">
-                  <div className="eb-affiliation">
-                    <strong>Instituto do Cérebro</strong>
-                    <span>Rio Grande do Sul — pesquisador</span>
-                  </div>
-                  <div className="eb-affiliation">
-                    <strong>Nathan Kline Institute</strong>
-                    <span>New York, USA — <em>doctorate stay</em></span>
-                  </div>
+                <div className="eb-professor-badges" aria-label="Credenciais e afiliações">
+                  <span className="eb-professor-badge">Mestrado em filosofia</span>
+                  <span className="eb-professor-badge">CAPES-PDSE</span>
+                  <span className="eb-professor-badge">InsCer-RS</span>
+                  <span className="eb-professor-badge">Nathan Kline Institute</span>
+                  <span className="eb-professor-badge">Palestrante</span>
                 </div>
-                <ul className="eb-professor-list">
-                  <li>
-                    Mestrado em filosofia. <em>"An Interdisciplinary Analysis of Behavioral Genetics"</em>;
-                    dissertação aprovada com louvor.
-                  </li>
-                  <li>
-                    Bolsista da <strong>CAPES-PDSE</strong>. Pesquisador do InsCer-RS em colaboração
-                    com o Nathan Kline Institute — New York, EUA.
-                  </li>
-                  <li>
-                    Palestrante e divulgador da genética comportamental, neuroimagem e
-                    interdisciplinaridade na psicologia.
-                  </li>
-                </ul>
+                <p className="eb-professor-copy">
+                  Mestre em filosofia com a dissertação <em>"An Interdisciplinary Analysis of
+                  Behavioral Genetics"</em>, aprovada com louvor. Bolsista CAPES-PDSE,
+                  pesquisador do Instituto do Cérebro do Rio Grande do Sul em colaboração
+                  com o Nathan Kline Institute, em New York, e palestrante nas áreas de
+                  genética comportamental, neuroimagem e interdisciplinaridade na psicologia.
+                </p>
                 <div className="eb-professor-stat">
-                  +200
+                  200+
                   <span>alunos certificados em aulas online</span>
                 </div>
               </div>

@@ -3,5 +3,9 @@
   "name": "estado-base-design",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
+  "main": "@tanstack/react-start/server-entry"
+
+  // Secrets configuradas no Cloudflare Dashboard (não colocar aqui):
+  // MP_ACCESS_TOKEN
+  // VITE_MP_PUBLIC_KEY
 }

@@ -52,7 +52,7 @@ function PagamentoPage() {
               Inscrição
             </p>
             <h1 className="mt-5 font-serif text-[clamp(36px,6vw,60px)] leading-[1.08]">
-              {COURSE_NAME}
+              Cartão, boleto ou PIX
             </h1>
             <p className="mt-5 text-base text-muted-foreground md:text-lg">
               3 aulas ao vivo · 12, 19 e 26 de agosto · Google Meet · com certificado

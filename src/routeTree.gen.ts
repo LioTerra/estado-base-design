@@ -14,7 +14,8 @@ import { Route as SincronosRouteImport } from './routes/sincronos'
 import { Route as PagamentoRouteImport } from './routes/pagamento'
 import { Route as ObrigadoRouteImport } from './routes/obrigado'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiCreatePreferenceRouteImport } from './routes/api/create-preference'
+import { Route as ApiProcessOrderRouteImport } from './routes/api/process-order'
+import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -41,9 +42,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiCreatePreferenceRoute = ApiCreatePreferenceRouteImport.update({
-  id: '/api/create-preference',
-  path: '/api/create-preference',
+const ApiProcessOrderRoute = ApiProcessOrderRouteImport.update({
+  id: '/api/process-order',
+  path: '/api/process-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
+  id: '/api/create-order',
+  path: '/api/create-order',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -53,7 +59,8 @@ export interface FileRoutesByFullPath {
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/api/create-preference': typeof ApiCreatePreferenceRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/process-order': typeof ApiProcessOrderRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +68,8 @@ export interface FileRoutesByTo {
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/api/create-preference': typeof ApiCreatePreferenceRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/process-order': typeof ApiProcessOrderRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,7 +78,8 @@ export interface FileRoutesById {
   '/pagamento': typeof PagamentoRoute
   '/sincronos': typeof SincronosRoute
   '/sobre': typeof SobreRoute
-  '/api/create-preference': typeof ApiCreatePreferenceRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/process-order': typeof ApiProcessOrderRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -80,7 +89,8 @@ export interface FileRouteTypes {
     | '/pagamento'
     | '/sincronos'
     | '/sobre'
-    | '/api/create-preference'
+    | '/api/create-order'
+    | '/api/process-order'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -88,7 +98,8 @@ export interface FileRouteTypes {
     | '/pagamento'
     | '/sincronos'
     | '/sobre'
-    | '/api/create-preference'
+    | '/api/create-order'
+    | '/api/process-order'
   id:
     | '__root__'
     | '/'
@@ -96,7 +107,8 @@ export interface FileRouteTypes {
     | '/pagamento'
     | '/sincronos'
     | '/sobre'
-    | '/api/create-preference'
+    | '/api/create-order'
+    | '/api/process-order'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,7 +117,8 @@ export interface RootRouteChildren {
   PagamentoRoute: typeof PagamentoRoute
   SincronosRoute: typeof SincronosRoute
   SobreRoute: typeof SobreRoute
-  ApiCreatePreferenceRoute: typeof ApiCreatePreferenceRoute
+  ApiCreateOrderRoute: typeof ApiCreateOrderRoute
+  ApiProcessOrderRoute: typeof ApiProcessOrderRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -145,11 +158,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/create-preference': {
-      id: '/api/create-preference'
-      path: '/api/create-preference'
-      fullPath: '/api/create-preference'
-      preLoaderRoute: typeof ApiCreatePreferenceRouteImport
+    '/api/process-order': {
+      id: '/api/process-order'
+      path: '/api/process-order'
+      fullPath: '/api/process-order'
+      preLoaderRoute: typeof ApiProcessOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/create-order': {
+      id: '/api/create-order'
+      path: '/api/create-order'
+      fullPath: '/api/create-order'
+      preLoaderRoute: typeof ApiCreateOrderRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -161,7 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   PagamentoRoute: PagamentoRoute,
   SincronosRoute: SincronosRoute,
   SobreRoute: SobreRoute,
-  ApiCreatePreferenceRoute: ApiCreatePreferenceRoute,
+  ApiCreateOrderRoute: ApiCreateOrderRoute,
+  ApiProcessOrderRoute: ApiProcessOrderRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

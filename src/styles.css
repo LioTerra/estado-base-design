@@ -67,21 +67,21 @@
   --radius: 0.125rem;
   /* Light: warm ivory paper, deep ink text. Brass accent, oxblood secondary. */
   --background: oklch(0.962 0.014 85);
-  --foreground: oklch(0.20 0.018 250);
+  --foreground: oklch(0.2 0.018 250);
   --card: oklch(0.962 0.014 85);
-  --card-foreground: oklch(0.20 0.018 250);
-  --popover: oklch(0.98 0.010 85);
-  --popover-foreground: oklch(0.20 0.018 250);
+  --card-foreground: oklch(0.2 0.018 250);
+  --popover: oklch(0.98 0.01 85);
+  --popover-foreground: oklch(0.2 0.018 250);
   /* Primary accent: aged brass / antique gold */
   --primary: oklch(0.62 0.115 75);
   --primary-foreground: oklch(0.16 0.018 250);
   /* Secondary surface: muted parchment */
   --secondary: oklch(0.91 0.016 80);
-  --secondary-foreground: oklch(0.20 0.018 250);
+  --secondary-foreground: oklch(0.2 0.018 250);
   --muted: oklch(0.92 0.012 80);
-  --muted-foreground: oklch(0.44 0.020 250);
+  --muted-foreground: oklch(0.44 0.02 250);
   /* Accent: deep oxblood / burgundy — edgy, classic, loud */
-  --accent: oklch(0.40 0.165 22);
+  --accent: oklch(0.4 0.165 22);
   --accent-foreground: oklch(0.96 0.014 85);
   --destructive: oklch(0.48 0.18 27);
   --destructive-foreground: oklch(0.96 0.014 85);
@@ -92,14 +92,14 @@
   --chart-1: oklch(0.62 0.115 75);
   --chart-2: oklch(0.42 0.115 25);
   --chart-3: oklch(0.32 0.045 250);
-  --chart-4: oklch(0.55 0.080 160);
-  --chart-5: oklch(0.50 0.060 280);
+  --chart-4: oklch(0.55 0.08 160);
+  --chart-5: oklch(0.5 0.06 280);
   --sidebar: oklch(0.962 0.014 85);
-  --sidebar-foreground: oklch(0.20 0.018 250);
+  --sidebar-foreground: oklch(0.2 0.018 250);
   --sidebar-primary: oklch(0.62 0.115 75);
   --sidebar-primary-foreground: oklch(0.16 0.018 250);
   --sidebar-accent: oklch(0.91 0.016 80);
-  --sidebar-accent-foreground: oklch(0.20 0.018 250);
+  --sidebar-accent-foreground: oklch(0.2 0.018 250);
   --sidebar-border: oklch(0.86 0.014 82);
   --sidebar-ring: oklch(0.62 0.115 75);
 }
@@ -120,24 +120,24 @@
   --muted-foreground: oklch(0.72 0.018 80);
   --accent: oklch(0.58 0.175 25);
   --accent-foreground: oklch(0.96 0.014 85);
-  --destructive: oklch(0.55 0.20 27);
+  --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.96 0.014 85);
   /* Single ink-line for borders, inputs and dividers (dark) */
-  --border: oklch(0.30 0.022 250);
-  --input: oklch(0.30 0.022 250);
+  --border: oklch(0.3 0.022 250);
+  --input: oklch(0.3 0.022 250);
   --ring: oklch(0.74 0.125 78);
   --chart-1: oklch(0.74 0.125 78);
   --chart-2: oklch(0.55 0.135 25);
-  --chart-3: oklch(0.62 0.060 250);
-  --chart-4: oklch(0.68 0.080 160);
-  --chart-5: oklch(0.60 0.070 280);
+  --chart-3: oklch(0.62 0.06 250);
+  --chart-4: oklch(0.68 0.08 160);
+  --chart-5: oklch(0.6 0.07 280);
   --sidebar: oklch(0.16 0.022 250);
   --sidebar-foreground: oklch(0.93 0.014 85);
   --sidebar-primary: oklch(0.74 0.125 78);
   --sidebar-primary-foreground: oklch(0.16 0.022 250);
   --sidebar-accent: oklch(0.24 0.024 250);
   --sidebar-accent-foreground: oklch(0.93 0.014 85);
-  --sidebar-border: oklch(0.30 0.022 250);
+  --sidebar-border: oklch(0.3 0.022 250);
   --sidebar-ring: oklch(0.74 0.125 78);
 }
 
@@ -156,7 +156,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-serif);
     font-weight: 400;
     letter-spacing: -0.015em;
@@ -168,4 +173,27 @@
     background-color: var(--color-primary);
     color: var(--color-primary-foreground);
   }
+}
+
+/* Mercado Pago renders the secure card fields inside iframes; these rules keep
+   the surrounding Brick controls aligned with the Estado Base visual system. */
+#cardPaymentBrick_container button {
+  border-radius: 4px !important;
+  background: #c9963a !important;
+  color: #f7f3ee !important;
+  font-family: var(--font-serif) !important;
+  font-size: 17px !important;
+}
+
+#cardPaymentBrick_container input,
+#cardPaymentBrick_container select {
+  border-color: #d9d0c4 !important;
+  border-radius: 4px !important;
+  color: #1c1a2e !important;
+}
+
+#cardPaymentBrick_container label {
+  color: #1c1a2e !important;
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
 }

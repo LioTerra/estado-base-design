@@ -1,4 +1,12 @@
-import { useEffect } from "react";
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
 import certificateModel from "./assets/certificado-modelo.webp";
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
@@ -132,9 +140,14 @@ const BRAND_STYLES = `
     display: grid;
     gap:     3rem;
     align-items: center;
+    max-width: 64rem;
+    margin-inline: auto;
+    text-align: center;
   }
-  @media (min-width: 960px) {
-    .eb-hero-grid { max-width: 64rem; }
+  .eb-hero-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .eb-section h2,
   .eb-testimonials-section h2,
@@ -157,6 +170,7 @@ const BRAND_STYLES = `
   .eb-hero-meta {
     display:     flex;
     flex-wrap:   wrap;
+    justify-content: center;
     gap:         0.5rem 1rem;
     font-size:   14px;
     color:       var(--muted-fg);
@@ -165,9 +179,17 @@ const BRAND_STYLES = `
   .eb-dot { color: var(--border); }
   .eb-hero-actions {
     display:     flex;
-    flex-wrap:   wrap;
+    flex-direction: column;
     gap:         0.9rem;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .eb-hero-actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
   }
   .eb-hero-subtitle {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
@@ -182,22 +204,12 @@ const BRAND_STYLES = `
     color: var(--fg);
     margin-bottom: 1.25rem;
   }
-  @media (min-width: 768px) {
-    .eb-hero-grid {
-      margin-inline: auto;
-      text-align: center;
-    }
-    .eb-lede {
-      margin-inline: auto;
-    }
-    .eb-hero-meta,
-    .eb-hero-actions {
-      justify-content: center;
-    }
-  }
+  .eb-lede { margin-inline: auto; }
   .eb-hero-note {
     font-size: 13px;
     color:     var(--muted-fg);
+    flex-basis: 100%;
+    text-align: center;
   }
   .eb-offer-card {
     border:     1px solid var(--border);
@@ -530,23 +542,12 @@ const BRAND_STYLES = `
     }
   }
 
-  /* ── Testimonials grid ── */
+  /* ── Testimonials carousel ── */
   .eb-testimonials-section {
     padding:    0 0 2rem;
     background: linear-gradient(180deg, var(--bg) 0%, var(--secondary) 45%, var(--bg) 100%);
   }
   .eb-testimonials-section .eb-section-head { margin-bottom: 2rem; }
-  .eb-testimonials-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 760px) {
-    .eb-testimonials-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2rem;
-    }
-  }
   .eb-testimonial {
     position:          relative;
     padding:           0.65rem;
@@ -581,7 +582,7 @@ const BRAND_STYLES = `
   .eb-testimonial-image {
     display:       block;
     width:         100%;
-    height:        560px;
+    height:        520px;
     object-fit:    contain;
     border-radius: 12px;
     background:    #101818;
@@ -589,6 +590,23 @@ const BRAND_STYLES = `
   @media (max-width: 480px) {
     .eb-testimonial { padding: 0.5rem; }
     .eb-testimonial-image { height: 430px; }
+  }
+  .eb-testimonial-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+  }
+  .eb-testimonial-dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--primary);
+    background: transparent;
+    padding: 0;
+  }
+  .eb-testimonial-dot[aria-current="true"] {
+    background: var(--primary);
   }
 
   /* ── Pricing ── */
@@ -905,19 +923,28 @@ const LESSONS = [
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
 // Não faz nada enquanto COURSE.metaPixelId estiver vazio.
+type MetaPixelFunction = ((...args: unknown[]) => void) & {
+  callMethod?: (...args: unknown[]) => void;
+  push: MetaPixelFunction;
+  loaded: boolean;
+  version: string;
+  queue: unknown[][];
+};
+
 declare global {
   interface Window {
-    fbq?: (...args: unknown[]) => void;
-    _fbq?: unknown;
+    fbq?: MetaPixelFunction;
+    _fbq?: MetaPixelFunction;
   }
 }
 
 function useMetaPixel(pixelId: string) {
   useEffect(() => {
     if (!pixelId || typeof window === "undefined" || window.fbq) return;
-    const fbq: any = function (...args: unknown[]) {
-      fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args);
-    };
+    const fbq = ((...args: unknown[]) => {
+      if (fbq.callMethod) fbq.callMethod(...args);
+      else fbq.queue.push(args);
+    }) as MetaPixelFunction;
     fbq.push = fbq;
     fbq.loaded = true;
     fbq.version = "2.0";
@@ -935,6 +962,43 @@ function useMetaPixel(pixelId: string) {
 
 function trackInitiateCheckout() {
   window.fbq?.("track", "InitiateCheckout");
+}
+
+function smoothScrollTo(targetId: string, duration = 1100) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  const header = document.querySelector<HTMLElement>(".eb-topbar");
+  const headerOffset = header?.getBoundingClientRect().height ?? 0;
+  const startPosition = window.scrollY;
+  const targetPosition = target.getBoundingClientRect().top + startPosition - headerOffset;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.scrollTo(0, targetPosition);
+    return;
+  }
+
+  const distance = targetPosition - startPosition;
+  let startTime: number | null = null;
+
+  const easeInOutCubic = (progress: number) =>
+    progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+  const step = (now: number) => {
+    if (startTime === null) startTime = now;
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+
+    if (progress < 1) requestAnimationFrame(step);
+  };
+
+  requestAnimationFrame(step);
+}
+
+function handleAnchorClick(event: React.MouseEvent<HTMLAnchorElement>, targetId: string) {
+  event.preventDefault();
+  smoothScrollTo(targetId);
 }
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -988,11 +1052,16 @@ function SignupLink({
   children: React.ReactNode;
   className?: string;
 }) {
+  const isInternal = COURSE.checkoutUrl === "#";
+
   return (
     <a
       href={signupHref()}
       className={className}
-      onClick={trackInitiateCheckout}
+      onClick={(event) => {
+        trackInitiateCheckout();
+        if (isInternal) handleAnchorClick(event, "inscricao");
+      }}
       {...signupTargetProps()}
     >
       {children}
@@ -1017,6 +1086,26 @@ function PaymentLink({
 // ─── Testimonials ────────────────────────────────────────────────────────────
 
 function Testimonials() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selectedSlide, setSelectedSlide] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const updateSelectedSlide = () => {
+      setSelectedSlide(api.selectedScrollSnap());
+    };
+
+    updateSelectedSlide();
+    api.on("select", updateSelectedSlide);
+    api.on("reInit", updateSelectedSlide);
+
+    return () => {
+      api.off("select", updateSelectedSlide);
+      api.off("reInit", updateSelectedSlide);
+    };
+  }, [api]);
+
   return (
     <section className="eb-testimonials-section">
       <div className="eb-container eb-container-6xl">
@@ -1024,11 +1113,38 @@ function Testimonials() {
           <Eyebrow>Quem já estudou</Eyebrow>
           <h2 style={{ marginTop: "1.5rem" }}>Depoimentos de alunos</h2>
         </div>
-        <div className="eb-testimonials-grid">
-          {TESTIMONIAL_IMAGES.map((item, i) => (
-            <figure key={i} className="eb-testimonial">
-              <img className="eb-testimonial-image" src={item.src} alt={item.alt} loading="lazy" />
-            </figure>
+        <Carousel
+          opts={{ align: "center", loop: true }}
+          setApi={setApi}
+          className="mx-auto w-full max-w-5xl"
+        >
+          <CarouselContent className="-ml-4">
+            {TESTIMONIAL_IMAGES.map((item) => (
+              <CarouselItem key={item.src} className="basis-[85%] pl-4 sm:basis-1/2">
+                <figure className="eb-testimonial">
+                  <img
+                    className="eb-testimonial-image"
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                  />
+                </figure>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden border-border bg-bg text-fg hover:bg-secondary sm:flex" />
+          <CarouselNext className="hidden border-border bg-bg text-fg hover:bg-secondary sm:flex" />
+        </Carousel>
+        <div className="eb-testimonial-dots" aria-label="Selecionar depoimento">
+          {TESTIMONIAL_IMAGES.map((item, index) => (
+            <button
+              key={item.src}
+              type="button"
+              className="eb-testimonial-dot"
+              aria-label={`Ir para depoimento ${index + 1}`}
+              aria-current={selectedSlide === index}
+              onClick={() => api?.scrollTo(index)}
+            />
           ))}
         </div>
       </div>
@@ -1122,7 +1238,11 @@ export default function LandingPage() {
                 </div>
                 <div className="eb-hero-actions">
                   <SignupLink>Quero entrar na turma</SignupLink>
-                  <a href="#conteudo" className="eb-btn eb-btn-secondary">
+                  <a
+                    href="#conteudo"
+                    className="eb-btn eb-btn-secondary"
+                    onClick={(event) => handleAnchorClick(event, "conteudo")}
+                  >
                     Ver conteúdo
                   </a>
                   <span className="eb-hero-note">Aulas ao vivo, gravações e certificado.</span>

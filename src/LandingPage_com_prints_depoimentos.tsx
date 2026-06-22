@@ -1,12 +1,4 @@
-import {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import certificateModel from "./assets/certificado-modelo.webp";
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
@@ -542,17 +534,45 @@ const BRAND_STYLES = `
     }
   }
 
-  /* ── Testimonials carousel ── */
+  /* ── Testimonials continuous marquee ── */
   .eb-testimonials-section {
     padding:    0 0 2rem;
     background: linear-gradient(180deg, var(--bg) 0%, var(--secondary) 45%, var(--bg) 100%);
   }
   .eb-testimonials-section .eb-section-head { margin-bottom: 2rem; }
+  .eb-testimonials-viewport {
+    overflow: hidden;
+    padding: 1.5rem 0 2rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+  }
+  .eb-testimonials-track {
+    display: flex;
+    width: max-content;
+    animation: eb-testimonials-scroll 50s linear infinite;
+    will-change: transform;
+  }
+  .eb-testimonials-group {
+    display: flex;
+    gap: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .eb-testimonials-viewport:hover .eb-testimonials-track {
+    animation-play-state: paused;
+  }
+  @keyframes eb-testimonials-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .eb-testimonials-track { animation: none; }
+  }
   .eb-testimonial {
+    flex:              0 0 320px;
     position:          relative;
-    padding:           0.5rem;
-    border-radius:     14px;
-    background:        rgba(247,243,238,0.72);
+    padding:           0.65rem;
+    border-radius:     18px;
+    background:        rgba(247,243,238,0.38);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
             backdrop-filter: blur(22px) saturate(150%);
     box-shadow:
@@ -582,30 +602,13 @@ const BRAND_STYLES = `
   .eb-testimonial-image {
     display:       block;
     width:         100%;
-    height:        auto;
-    aspect-ratio:  588 / 1280;
+    height:        440px;
     object-fit:    cover;
-    border-radius: 9px;
+    border-radius: 12px;
   }
   @media (max-width: 480px) {
-    .eb-testimonial { padding: 0.4rem; }
-  }
-  .eb-testimonial-dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    margin-top: 1.5rem;
-  }
-  .eb-testimonial-dot {
-    width: 8px;
-    height: 8px;
-    border: 1px solid var(--primary);
-    background: transparent;
-    padding: 0;
-  }
-  .eb-testimonial-dot[aria-current="true"] {
-    background: var(--primary);
+    .eb-testimonial { flex-basis: 270px; padding: 0.5rem; }
+    .eb-testimonial-image { height: 430px; }
   }
 
   /* ── Pricing ── */
@@ -1085,36 +1088,6 @@ function PaymentLink({
 // ─── Testimonials ────────────────────────────────────────────────────────────
 
 function Testimonials() {
-  const [api, setApi] = useState<CarouselApi>();
-  const [selectedSlide, setSelectedSlide] = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-
-    const updateSelectedSlide = () => {
-      setSelectedSlide(api.selectedScrollSnap());
-    };
-
-    updateSelectedSlide();
-    api.on("select", updateSelectedSlide);
-    api.on("reInit", updateSelectedSlide);
-
-    return () => {
-      api.off("select", updateSelectedSlide);
-      api.off("reInit", updateSelectedSlide);
-    };
-  }, [api]);
-
-  useEffect(() => {
-    if (!api) return;
-
-    const autoplay = window.setInterval(() => {
-      api.scrollNext();
-    }, 3200);
-
-    return () => window.clearInterval(autoplay);
-  }, [api]);
-
   return (
     <section className="eb-testimonials-section">
       <div className="eb-container eb-container-6xl">
@@ -1122,15 +1095,17 @@ function Testimonials() {
           <Eyebrow>Quem já estudou</Eyebrow>
           <h2 style={{ marginTop: "1.5rem" }}>Depoimentos de alunos</h2>
         </div>
-        <Carousel
-          opts={{ align: "center", loop: true }}
-          setApi={setApi}
-          className="mx-auto w-full max-w-5xl"
-        >
-          <CarouselContent className="-ml-4">
-            {TESTIMONIAL_IMAGES.map((item) => (
-              <CarouselItem key={item.src} className="basis-[85%] pl-4 sm:basis-1/2">
-                <figure className="eb-testimonial">
+      </div>
+      <div className="eb-testimonials-viewport">
+        <div className="eb-testimonials-track">
+          {[false, true].map((duplicate) => (
+            <div
+              key={duplicate ? "duplicate" : "original"}
+              className="eb-testimonials-group"
+              aria-hidden={duplicate || undefined}
+            >
+              {TESTIMONIAL_IMAGES.map((item) => (
+                <figure key={item.src} className="eb-testimonial">
                   <img
                     className="eb-testimonial-image"
                     src={item.src}
@@ -1138,22 +1113,8 @@ function Testimonials() {
                     loading="lazy"
                   />
                 </figure>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden border-border bg-bg text-fg hover:bg-secondary sm:flex" />
-          <CarouselNext className="hidden border-border bg-bg text-fg hover:bg-secondary sm:flex" />
-        </Carousel>
-        <div className="eb-testimonial-dots" aria-label="Selecionar depoimento">
-          {TESTIMONIAL_IMAGES.map((item, index) => (
-            <button
-              key={item.src}
-              type="button"
-              className="eb-testimonial-dot"
-              aria-label={`Ir para depoimento ${index + 1}`}
-              aria-current={selectedSlide === index}
-              onClick={() => api?.scrollTo(index)}
-            />
+              ))}
+            </div>
           ))}
         </div>
       </div>

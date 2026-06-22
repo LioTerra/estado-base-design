@@ -550,9 +550,9 @@ const BRAND_STYLES = `
   .eb-testimonials-section .eb-section-head { margin-bottom: 2rem; }
   .eb-testimonial {
     position:          relative;
-    padding:           0.65rem;
-    border-radius:     18px;
-    background:        rgba(247,243,238,0.38);
+    padding:           0.5rem;
+    border-radius:     14px;
+    background:        rgba(247,243,238,0.72);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
             backdrop-filter: blur(22px) saturate(150%);
     box-shadow:
@@ -582,14 +582,13 @@ const BRAND_STYLES = `
   .eb-testimonial-image {
     display:       block;
     width:         100%;
-    height:        520px;
-    object-fit:    contain;
-    border-radius: 12px;
-    background:    #101818;
+    height:        auto;
+    aspect-ratio:  588 / 1280;
+    object-fit:    cover;
+    border-radius: 9px;
   }
   @media (max-width: 480px) {
-    .eb-testimonial { padding: 0.5rem; }
-    .eb-testimonial-image { height: 430px; }
+    .eb-testimonial { padding: 0.4rem; }
   }
   .eb-testimonial-dots {
     display: flex;
@@ -1106,6 +1105,16 @@ function Testimonials() {
     };
   }, [api]);
 
+  useEffect(() => {
+    if (!api) return;
+
+    const autoplay = window.setInterval(() => {
+      api.scrollNext();
+    }, 3200);
+
+    return () => window.clearInterval(autoplay);
+  }, [api]);
+
   return (
     <section className="eb-testimonials-section">
       <div className="eb-container eb-container-6xl">
@@ -1220,12 +1229,6 @@ export default function LandingPage() {
                 <p className="eb-hero-subtitle">Desenvolvimento, Big Five e Psicopatologia</p>
                 <p className="eb-hero-professor">com Prof. Me. Vicente Cotanda</p>
                 <div className="eb-hero-meta">
-                  <span>
-                    <strong>Ministrado por Prof. Me. Vicente Cotanda</strong>
-                  </span>
-                  <span className="eb-dot" aria-hidden>
-                    ·
-                  </span>
                   <span>
                     <strong>{COURSE.datesLabel}</strong>
                   </span>
@@ -1352,9 +1355,6 @@ export default function LandingPage() {
                     </span>
                     <span>
                       Plataforma: <strong>Google Meet</strong>
-                    </span>
-                    <span>
-                      Vagas: <strong>turma reduzida</strong>
                     </span>
                   </div>
                 </div>

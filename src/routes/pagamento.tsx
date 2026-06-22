@@ -75,10 +75,10 @@ function PagamentoPage() {
 
         <section className="mx-auto mt-12 max-w-3xl border-y border-border py-8 text-center">
           <p className="font-serif text-[clamp(46px,8vw,72px)] leading-none">
-            9x de R$ 144,33
+            R$ 979,00
           </p>
           <p className="mt-3 text-base text-muted-foreground">
-            ou R$ 1.299,00 à vista
+            no PIX, à vista · ou em até 9x sem juros no cartão
           </p>
         </section>
 
@@ -93,9 +93,8 @@ function PagamentoPage() {
             href={MERCADO_PAGO_URL}
           >
             <p>
-              Parcele em até 9x de R$ 144,33 sem juros, ou pague com
-              boleto bancário. Pagamento processado com segurança via
-              Mercado Pago.
+              Parcele em até 9x sem juros, ou pague com boleto bancário.
+              Pagamento processado com segurança via Mercado Pago.
             </p>
           </PaymentCard>
 
@@ -109,15 +108,15 @@ function PagamentoPage() {
           >
             <p>
               <strong className="font-serif text-3xl font-medium text-foreground">
-                R$ 1.104,15
+                R$ 979,00
               </strong>{" "}
               <span className="text-sm text-muted-foreground line-through">
                 R$ 1.299,00
               </span>
             </p>
             <p>
-              Para pagar via PIX com desconto, fale com a gente diretamente —
-              confirmamos os dados e enviamos a chave.
+              Condição especial de primeiro lote. Para pagar via PIX, fale com
+              a gente diretamente — confirmamos os dados e enviamos a chave.
             </p>
           </PaymentCard>
         </section>

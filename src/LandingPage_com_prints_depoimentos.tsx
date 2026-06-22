@@ -169,6 +169,19 @@ const BRAND_STYLES = `
     gap:         0.9rem;
     align-items: center;
   }
+  .eb-hero-subtitle {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-style: italic;
+    line-height: 1.25;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .eb-hero-professor {
+    font-size: 15px;
+    color: var(--fg);
+    margin-bottom: 1.25rem;
+  }
   @media (min-width: 768px) {
     .eb-hero-grid {
       margin-inline: auto;
@@ -360,6 +373,71 @@ const BRAND_STYLES = `
     margin-inline: auto;
     text-align: center;
   }
+  .eb-professor-subtitle {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-style: italic;
+    color: var(--accent);
+    text-align: center;
+    margin: -0.75rem auto 2.5rem;
+  }
+  .eb-affiliations {
+    display: grid;
+    gap: 1rem;
+    max-width: 52rem;
+    margin: 0 auto 2.5rem;
+  }
+  @media (min-width: 700px) {
+    .eb-affiliations { grid-template-columns: repeat(2, 1fr); }
+  }
+  .eb-affiliation {
+    border-block: 1px solid var(--border);
+    padding-block: 1.25rem;
+    text-align: center;
+  }
+  .eb-affiliation strong {
+    display: block;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 0.35rem;
+  }
+  .eb-affiliation span { font-size: 14px; color: var(--muted-fg); }
+  .eb-professor-list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    max-width: 52rem;
+    margin: 0 auto 2.5rem;
+    text-align: left;
+  }
+  .eb-professor-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .eb-professor-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+  }
+  .eb-professor-stat {
+    text-align: center;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: clamp(34px, 5vw, 52px);
+    color: var(--primary);
+  }
+  .eb-professor-stat span {
+    display: block;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-top: 0.35rem;
+  }
   .eb-bio-card {
     border:     1px solid var(--border);
     background: var(--secondary);
@@ -422,6 +500,22 @@ const BRAND_STYLES = `
   }
   .eb-encontro:first-child { border-top: 1px solid var(--border); }
   .eb-encontro-num { font-size: 12px; letter-spacing: 0.12em; color: var(--muted-fg); padding-top: 0.3em; }
+  .eb-encontro-num {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--fg);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .eb-encontro-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+  }
   .eb-encontro h3  { font-size: 20px; font-weight: 400; margin-bottom: 0.75rem; }
   .eb-encontro p   { font-size: 15px; color: var(--muted-fg); line-height: 1.65; }
   .eb-encontro p + p { margin-top: 1rem; }
@@ -591,6 +685,70 @@ const BRAND_STYLES = `
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
+  .eb-investment-subtitle {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: 22px;
+    font-style: italic;
+    text-align: center;
+    color: var(--accent);
+    margin: -2rem auto 3rem;
+  }
+  .eb-offer-panel {
+    position: relative;
+    background: var(--accent);
+    color: var(--accent-fg);
+    padding: 2rem;
+  }
+  .eb-offer-panel * { color: inherit; }
+  .eb-lot-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .eb-old-price {
+    font-size: 14px;
+    margin: 1.75rem 0 0.75rem;
+    opacity: 0.78;
+  }
+  .eb-old-price s { margin-right: 0.5rem; }
+  .eb-lot-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.9rem;
+  }
+  .eb-lot-price strong {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .eb-lot-price em { font-size: 14px; opacity: 0.8; }
+  .eb-lot-terms { margin-top: 1rem; font-size: 14px; line-height: 1.55; }
+  .eb-referral {
+    border: 1px solid var(--primary);
+    background: var(--bg);
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+  .eb-referral-value {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: 36px;
+    color: var(--accent);
+  }
+  .eb-referral strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-block: 0.35rem;
+  }
+  .eb-referral p { font-size: 14px; color: var(--muted-fg); line-height: 1.55; }
+  .eb-referral + .eb-btn { margin-top: 1rem; }
   .eb-price-installments { font-size: 14px; color: var(--muted-fg); margin-top: 0.5rem; }
   .eb-price-includes   { font-size: 15px; color: var(--muted-fg); margin-bottom: 1.75rem; line-height: 1.55; }
   .eb-price-secure     { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin-top: 0.75rem; }
@@ -755,29 +913,21 @@ const BRAND_STYLES = `
 // Única fonte de verdade para dados da turma. Quando os dados reais chegarem,
 // edite SOMENTE aqui — nada mais no arquivo precisa mudar.
 const COURSE = {
-  title: 'Curso On-line Sobre Personalidade, Neurociência e o Modelo dos Cinco Grandes Fatores (Big Five Model)',
   datesLabel: '12, 19 e 26 de agosto',
-  registrationDeadline: '11 de agosto',
+  registrationMessage: 'Inscrições abertas até agosto. Primeiros compradores com condições especiais de primeiro lote.',
   spotsLabel: 'vagas limitadas',
-  // Preço
-  priceLabel: 'R$ 1.299,00',
-  installmentLabel: '9x de R$ 144,33',
-  cashLabel: 'ou R$ 1.299,00 à vista',
-  maxInstallments: 9,
   // Enquanto for '#', CTAs da landing só ancoram na seção de inscrição.
   checkoutUrl: '#',
   // Formato (dependente da turma)
-  duration: '3 semanas',
   meetings: '3 aulas ao vivo, semanais',
-  schedule: 'Quartas, 19h45–21h (horário de Brasília)',
-  workload: '4h30 de encontros síncronos',
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
   metaPixelId: '',                      // TBD
 }
 
 const LESSONS = [
   {
-    label: 'Aula 1 — 12 de agosto',
+    label: 'Aula 1',
+    meetingLabel: 'Encontro 01 · Dia 12 de agosto',
     title: 'O debate nature vs. nurture',
     paragraphs: [
       'Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade?',
@@ -787,7 +937,8 @@ const LESSONS = [
     ],
   },
   {
-    label: 'Aula 2 — 19 de agosto',
+    label: 'Aula 2',
+    meetingLabel: 'Encontro 02 · Dia 19 de agosto',
     title: 'A mensuração da personalidade e os Big Five',
     paragraphs: [
       'No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model).',
@@ -796,7 +947,8 @@ const LESSONS = [
     ],
   },
   {
-    label: 'Aula 3 — 26 de agosto',
+    label: 'Aula 3',
+    meetingLabel: 'Encontro 03 · Dia 26 de agosto',
     title: 'Implicações dos traços e suas bases biológicas',
     paragraphs: [
       'No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas.',
@@ -1035,17 +1187,13 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-hero-grid">
               <div>
-                <h1>
-                  Personalidade, Neurociência e o Modelo dos{' '}
-                  <strong>Cinco Grandes Fatores</strong>{' '}
-                  <em>(Big Five Model)</em>
-                </h1>
-                <p className="eb-lede">
-                  Um percurso por psicologia, genética comportamental e neurociência
-                  — com rigor conceitual, aulas atualizadas e exemplos cotidianos.
+                <h1>Personalidade</h1>
+                <p className="eb-hero-subtitle">
+                  Desenvolvimento, Big Five e Psicopatologia
                 </p>
+                <p className="eb-hero-professor">com Prof. Me. Vicente Cotanda</p>
                 <div className="eb-hero-meta">
-                  <span><strong>Ministrado por Prof. Vicente Cotanda</strong></span>
+                  <span><strong>Ministrado por Prof. Me. Vicente Cotanda</strong></span>
                   <span className="eb-dot" aria-hidden>·</span>
                   <span><strong>{COURSE.datesLabel}</strong></span>
                   <span className="eb-dot" aria-hidden>·</span>
@@ -1070,12 +1218,16 @@ export default function LandingPage() {
             <div className="eb-section-head">
               <Eyebrow>Programação</Eyebrow>
               <h2 style={{ marginTop: '1.5rem' }}>A programação das aulas</h2>
+              <p className="eb-lede" style={{ margin: '1rem auto 0' }}>
+                19h45 às 21h00 · via Google Meet
+              </p>
             </div>
             <div className="eb-encontros">
               {LESSONS.map((lesson) => (
                 <div key={lesson.label} className="eb-encontro">
                   <span className="eb-encontro-num">{lesson.label}</span>
                   <div>
+                    <span className="eb-encontro-label">{lesson.meetingLabel}</span>
                     <h3>{lesson.title}</h3>
                     {lesson.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
@@ -1089,17 +1241,43 @@ export default function LandingPage() {
 
         <Divider />
 
-        {/* ── ENCONTROS ───────────────────────────────────────────────────── */}
+        {/* ── PROFESSOR ───────────────────────────────────────────────────── */}
         <section className="eb-section">
           <div className="eb-container eb-container-6xl">
             <div className="eb-bio">
               <div className="eb-bio-text">
-                <div className="eb-bio-label">Quem conduz</div>
-                <h2>Vicente Cotanda.</h2>
-                <div className="eb-prose">
-                  <p><strong>Psicólogo · Mestre em filosofia (nature vs. nurture) · Doutorando em neuroimagem · Pesquisador no InsCer-RS</strong></p>
-                  <p>Psicólogo e mestre em filosofia, com pesquisa centrada no debate nature vs. nurture, Vicente Dall'Igna Cotanda é doutorando em neuroimagem e pesquisador no Instituto do Cérebro do RS (InsCer). Seu trabalho transita entre psicologia da personalidade, genética comportamental, neurodesenvolvimento e filosofia da ciência.</p>
-                  <p>O curso reflete esse percurso: rigor conceitual, didática clara e disposição para tratar ideias difíceis com o tempo que elas merecem.</p>
+                <div className="eb-bio-label">Sobre o professor</div>
+                <h2>Prof. Me. Vicente Cotanda</h2>
+                <p className="eb-professor-subtitle">
+                  Pesquisador em psicologia, genética comportamental e neuroimagem
+                </p>
+                <div className="eb-affiliations">
+                  <div className="eb-affiliation">
+                    <strong>Instituto do Cérebro</strong>
+                    <span>Rio Grande do Sul — pesquisador</span>
+                  </div>
+                  <div className="eb-affiliation">
+                    <strong>Nathan Kline Institute</strong>
+                    <span>New York, USA — <em>doctorate stay</em></span>
+                  </div>
+                </div>
+                <ul className="eb-professor-list">
+                  <li>
+                    Mestrado em filosofia. <em>"An Interdisciplinary Analysis of Behavioral Genetics"</em>;
+                    dissertação aprovada com louvor.
+                  </li>
+                  <li>
+                    Bolsista da <strong>CAPES-PDSE</strong>. Pesquisador do InsCer-RS em colaboração
+                    com o Nathan Kline Institute — New York, EUA.
+                  </li>
+                  <li>
+                    Palestrante e divulgador da genética comportamental, neuroimagem e
+                    interdisciplinaridade na psicologia.
+                  </li>
+                </ul>
+                <div className="eb-professor-stat">
+                  +200
+                  <span>alunos certificados em aulas online</span>
                 </div>
               </div>
             </div>
@@ -1117,34 +1295,46 @@ export default function LandingPage() {
         <section className="eb-section" id="inscricao">
           <div className="eb-container eb-container-6xl">
             <div className="eb-pricing-wrap">
-              <div className="eb-pricing-label">Inscrição</div>
+              <div className="eb-pricing-label">Investimento · Prof Vicente Cotanda</div>
               <h2>Entre na próxima turma</h2>
+              <p className="eb-investment-subtitle">Curso completo · 3 encontros ao vivo</p>
               <div className="eb-pricing-grid">
                 <div>
-                  <div className="eb-price-label">Valor</div>
-                  <div className="eb-price-amount">{COURSE.installmentLabel}</div>
-                  <div className="eb-price-installments">{COURSE.cashLabel}</div>
+                  <div className="eb-price-label">O que está incluso</div>
+                  <ul className="eb-price-checklist">
+                    <li>Gravação das aulas completas por 12 meses</li>
+                    <li>Certificado assinado</li>
+                    <li>Material exclusivo para estudo e revisão</li>
+                    <li>Descontos em eventos futuros</li>
+                  </ul>
                   <div className="eb-price-meta">
                     <span>Datas: <strong>{COURSE.datesLabel}</strong></span>
-                    <span>Duração: <strong>{COURSE.duration}</strong></span>
-                    <span>Formato: <strong>{COURSE.meetings}</strong></span>
-                    <span>Horário: <strong>{COURSE.schedule}</strong></span>
-                    <span>Vagas: <strong>{COURSE.spotsLabel} · Inscrições até {COURSE.registrationDeadline}</strong></span>
+                    <span>Horário: <strong>19h45 às 21h00</strong></span>
+                    <span>Plataforma: <strong>Google Meet</strong></span>
+                    <span>Vagas: <strong>{COURSE.spotsLabel}</strong></span>
                   </div>
                 </div>
                 <div>
-                  <p className="eb-price-includes">
-                    Você entra para uma turma ao vivo, acompanha as aulas com Vicente
-                    e recebe o material para revisar depois. Pagamento por cartão de crédito,
-                    boleto ou PIX.
-                  </p>
-                  <ul className="eb-price-checklist">
-                    <li>{COURSE.meetings}</li>
-                    <li>Gravações para rever no seu ritmo</li>
-                    <li>Material escrito de revisão</li>
-                    <li>Certificado de participação</li>
-                  </ul>
+                  <div className="eb-offer-panel">
+                    <span className="eb-lot-badge">1º lote</span>
+                    <p className="eb-old-price"><s>De R$ 1.299,00</s> 2º lote</p>
+                    <div className="eb-lot-price">
+                      <strong>R$ 979,00</strong>
+                      <em>no Pix, à vista</em>
+                    </div>
+                    <p className="eb-lot-terms">
+                      ou em até <strong>9x sem juros</strong> no cartão. Condições de primeiro lote.
+                    </p>
+                  </div>
+                  <div className="eb-referral">
+                    <div className="eb-referral-value">R$ 150 de volta</div>
+                    <strong>Indique e ganhe</strong>
+                    <p>Traga um(a) colega que se inscreva e receba R$ 150 de volta.</p>
+                  </div>
                   <PaymentLink className="eb-btn eb-btn-primary eb-btn-wide">Inscrever-se</PaymentLink>
+                  <p className="eb-price-includes" style={{ marginTop: '1rem', marginBottom: 0 }}>
+                    {COURSE.registrationMessage}
+                  </p>
                   <p className="eb-guarantee">
                     Garantia incondicional de 7 dias — pagamento processado via Mercado Pago.<br />
                     Se não for para você, devolvemos integralmente.
@@ -1217,7 +1407,7 @@ export default function LandingPage() {
               <em>{COURSE.datesLabel}.</em>
             </h2>
             <SignupLink>Quero entrar na turma</SignupLink>
-            <div className="eb-final-cta-vagas">Inscrições abertas até {COURSE.registrationDeadline}.</div>
+            <div className="eb-final-cta-vagas">{COURSE.registrationMessage}</div>
           </div>
         </section>
 

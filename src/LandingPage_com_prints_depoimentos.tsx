@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import certificateModel from './assets/certificado-modelo.webp'
+import { useEffect } from "react";
+import certificateModel from "./assets/certificado-modelo.webp";
 
 // ─── Brand tokens ────────────────────────────────────────────────────────────
 // Add these to your globals.css / styles.css under :root if you prefer;
@@ -530,81 +530,24 @@ const BRAND_STYLES = `
     }
   }
 
-  /* ── Testimonials marquee ── */
+  /* ── Testimonials grid ── */
   .eb-testimonials-section {
-    position:   relative;
-    padding:    0 0 1rem;
+    padding:    0 0 2rem;
     background: linear-gradient(180deg, var(--bg) 0%, var(--secondary) 45%, var(--bg) 100%);
   }
-  .eb-testimonials-section .eb-section-head { margin-bottom: 1rem; }
-  .eb-testimonials-viewport {
-    position:    relative;
-    overflow:    hidden;
-    padding:     1.5rem 0;
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
-            mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+  .eb-testimonials-section .eb-section-head { margin-bottom: 2rem; }
+  .eb-testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  .eb-testimonials-bg {
-    position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-  }
-  .eb-blob {
-    position:      absolute;
-    border-radius: 50%;
-    filter:        blur(70px);
-    will-change:   transform;
-  }
-  .eb-blob-1 {
-    width: 460px; height: 460px;
-    background: radial-gradient(circle, rgba(201,150,58,0.22), transparent 70%);
-    top: -100px; left: 8%;
-    animation: eb-blob-1 18s ease-in-out infinite alternate;
-  }
-  .eb-blob-2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(122,30,30,0.14), transparent 70%);
-    bottom: -140px; right: 10%;
-    animation: eb-blob-2 22s ease-in-out infinite alternate;
-  }
-  .eb-blob-3 {
-    width: 380px; height: 380px;
-    background: radial-gradient(circle, rgba(201,150,58,0.1), transparent 70%);
-    top: 28%; left: 50%;
-    transform: translateX(-50%);
-    animation: eb-blob-3 25s ease-in-out infinite alternate;
-  }
-  @keyframes eb-blob-1 {
-    from { transform: translate(0,0) scale(1); }
-    to   { transform: translate(60px,40px) scale(1.1); }
-  }
-  @keyframes eb-blob-2 {
-    from { transform: translate(0,0) scale(1); }
-    to   { transform: translate(-70px,-30px) scale(1.05); }
-  }
-  @keyframes eb-blob-3 {
-    from { transform: translate(-50%,0) scale(1); }
-    to   { transform: translate(calc(-50% + 50px),30px) scale(0.9); }
-  }
-  .eb-testimonials-track {
-    position:   relative;
-    z-index:    1;
-    display:    flex;
-    gap:        1.5rem;
-    width:      max-content;
-    padding:    0 1.5rem;
-    animation:  eb-scroll 50s linear infinite;
-    will-change:transform;
-  }
-  .eb-testimonials-viewport:hover .eb-testimonials-track { animation-play-state: paused; }
-  @keyframes eb-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .eb-testimonials-track { animation: none; }
-    .eb-blob { animation: none; }
+  @media (min-width: 760px) {
+    .eb-testimonials-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+    }
   }
   .eb-testimonial {
-    flex:              0 0 320px;
     position:          relative;
     padding:           0.65rem;
     border-radius:     18px;
@@ -638,13 +581,13 @@ const BRAND_STYLES = `
   .eb-testimonial-image {
     display:       block;
     width:         100%;
-    height:        440px;
+    height:        560px;
     object-fit:    contain;
     border-radius: 12px;
     background:    #101818;
   }
   @media (max-width: 480px) {
-    .eb-testimonial { flex: 0 0 270px; padding: 0.5rem; }
+    .eb-testimonial { padding: 0.5rem; }
     .eb-testimonial-image { height: 430px; }
   }
 
@@ -705,25 +648,21 @@ const BRAND_STYLES = `
   }
   .eb-offer-panel * { color: inherit; }
   .eb-lot-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    display: inline-block;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    color: var(--primary);
   }
   .eb-old-price {
     font-size: 14px;
-    margin: 1.75rem 0 0.75rem;
-    opacity: 0.78;
+    margin: 1.25rem 0 0.75rem;
+    opacity: 0.62;
   }
-  .eb-old-price s { margin-right: 0.5rem; }
   .eb-lot-price {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem 0.9rem;
+    display: grid;
+    gap: 0.35rem;
   }
   .eb-lot-price strong {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
@@ -911,87 +850,91 @@ const BRAND_STYLES = `
     flex-wrap: wrap;
     gap: 0.75rem 1rem;
   }
-`
+`;
 
 // ─── Course config ───────────────────────────────────────────────────────────
 // Única fonte de verdade para dados da turma. Quando os dados reais chegarem,
 // edite SOMENTE aqui — nada mais no arquivo precisa mudar.
 const COURSE = {
-  datesLabel: '12, 19 e 26 de agosto',
-  registrationMessage: 'Inscrições abertas até agosto. Primeiros compradores com condições especiais de primeiro lote.',
-  spotsLabel: 'vagas limitadas',
+  datesLabel: "12, 19 e 26 de agosto",
+  registrationMessage:
+    "Inscrições abertas até agosto. Primeiros compradores com condições especiais de primeiro lote.",
+  spotsLabel: "vagas limitadas",
   // Enquanto for '#', CTAs da landing só ancoram na seção de inscrição.
-  checkoutUrl: '#',
+  checkoutUrl: "#",
   // Formato (dependente da turma)
-  meetings: '3 aulas ao vivo, semanais',
+  meetings: "3 aulas ao vivo, semanais",
   // Meta Pixel — colar o ID quando o pixel for criado no Gerenciador de Eventos.
-  metaPixelId: '',                      // TBD
-}
+  metaPixelId: "", // TBD
+};
 
 const LESSONS = [
   {
-    label: 'Aula 1',
-    meetingLabel: 'Encontro 01 · Dia 12 de agosto',
-    title: 'O debate nature vs. nurture',
+    label: "Aula 1",
+    meetingLabel: "Encontro 01 · Dia 12 de agosto",
+    title: "O debate nature vs. nurture",
     paragraphs: [
-      'Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade?',
-      'Por que algumas pessoas são extrovertidas — adoram festas, shows e multidões — enquanto outras consideram essas situações insuportáveis? Por que algumas são organizadas e disciplinadas, e outras vivem no improviso e procrastinação? Por que algumas atravessam a vida com uma propensão à alegria e resiliência, e outras convivem com uma tristeza quase crônica?',
-      'Neste encontro, aprenderemos que a ciência contemporânea — especialmente a partir do fim do século XX — nos conduziu a uma concepção amplíssima sobre as forças que moldam a personalidade. Além das experiências de vida, falaremos sobre o efeito de condições pré-natais, como a inflamação durante a gestação; sobre diferenças genéticas e efeitos epigenéticos; e sobre como tudo isso predispõe as crianças a certos tipos de experiência ao longo da vida.',
-      'O debate nature vs. nurture (natureza vs. criação) é o tema central da nossa aula inaugural.',
+      "Em nosso primeiro encontro, abordaremos uma pergunta que atravessou os séculos, desde a Grécia Antiga até a ciência contemporânea: o que forma a nossa personalidade?",
+      "Por que algumas pessoas são extrovertidas — adoram festas, shows e multidões — enquanto outras consideram essas situações insuportáveis? Por que algumas são organizadas e disciplinadas, e outras vivem no improviso e procrastinação? Por que algumas atravessam a vida com uma propensão à alegria e resiliência, e outras convivem com uma tristeza quase crônica?",
+      "Neste encontro, aprenderemos que a ciência contemporânea — especialmente a partir do fim do século XX — nos conduziu a uma concepção amplíssima sobre as forças que moldam a personalidade. Além das experiências de vida, falaremos sobre o efeito de condições pré-natais, como a inflamação durante a gestação; sobre diferenças genéticas e efeitos epigenéticos; e sobre como tudo isso predispõe as crianças a certos tipos de experiência ao longo da vida.",
+      "O debate nature vs. nurture (natureza vs. criação) é o tema central da nossa aula inaugural.",
     ],
   },
   {
-    label: 'Aula 2',
-    meetingLabel: 'Encontro 02 · Dia 19 de agosto',
-    title: 'A mensuração da personalidade e os Big Five',
+    label: "Aula 2",
+    meetingLabel: "Encontro 02 · Dia 19 de agosto",
+    title: "A mensuração da personalidade e os Big Five",
     paragraphs: [
-      'No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model).',
-      'No Big Five, a personalidade é descrita como um conjunto enorme de pequenos traços que se associam em grandes dimensões. Com isso, a discussão conduzida na primeira aula, sobre os efeitos da genética, da epigenética e da criação, será ampliada a partir do emprego dessa ferramenta descritiva oriunda da psicologia.',
-      'Os cinco grandes fatores serão explicados desde o princípio, para que o aluno tenha total capacidade de interpretar a pesquisa empírica contemporânea e compreender, por conta própria, o raciocínio por trás do modelo mais estabelecido e famoso da área.',
+      "No nosso segundo encontro, o tema central será a mensuração da personalidade: como a combinação de 3 elementos — a teoria dos traços, a estatística e a hipótese lexical — deram fundamento ao modelo mais influente da psicologia contemporânea: o modelo dos cinco grandes fatores da personalidade (Big Five model).",
+      "No Big Five, a personalidade é descrita como um conjunto enorme de pequenos traços que se associam em grandes dimensões. Com isso, a discussão conduzida na primeira aula, sobre os efeitos da genética, da epigenética e da criação, será ampliada a partir do emprego dessa ferramenta descritiva oriunda da psicologia.",
+      "Os cinco grandes fatores serão explicados desde o princípio, para que o aluno tenha total capacidade de interpretar a pesquisa empírica contemporânea e compreender, por conta própria, o raciocínio por trás do modelo mais estabelecido e famoso da área.",
     ],
   },
   {
-    label: 'Aula 3',
-    meetingLabel: 'Encontro 03 · Dia 26 de agosto',
-    title: 'Implicações dos traços e suas bases biológicas',
+    label: "Aula 3",
+    meetingLabel: "Encontro 03 · Dia 26 de agosto",
+    title: "Implicações dos traços e suas bases biológicas",
     paragraphs: [
-      'No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas.',
-      'Para cada uma das cinco dimensões, analisaremos os mecanismos biológicos subjacentes mais plausíveis — de sistemas de recompensa a circuitos de ameaça — e o que significa, na prática, pontuar muito alto ou muito baixo em cada traço.',
-      'Assim, a ferramenta descritiva construída na segunda aula ganha profundidade: deixamos de apenas descrever a personalidade para compreender suas raízes e seus efeitos concretos na vida humana.',
-      'Ao final, exploraremos como outras características conhecidas — como a Dark Triad (narcisismo, maquiavelismo e psicopatia) — podem ser entendidas como determinadas configurações dos cinco grandes fatores, fechando o curso com as ferramentas para que o aluno interprete, por conta própria, qualquer perfil de personalidade.',
+      "No nosso terceiro e último encontro, nosso objetivo terá dois lados: estudar as implicações dos traços na vida das pessoas e investigar as bases biológicas a eles relacionadas.",
+      "Para cada uma das cinco dimensões, analisaremos os mecanismos biológicos subjacentes mais plausíveis — de sistemas de recompensa a circuitos de ameaça — e o que significa, na prática, pontuar muito alto ou muito baixo em cada traço.",
+      "Assim, a ferramenta descritiva construída na segunda aula ganha profundidade: deixamos de apenas descrever a personalidade para compreender suas raízes e seus efeitos concretos na vida humana.",
+      "Ao final, exploraremos como outras características conhecidas — como a Dark Triad (narcisismo, maquiavelismo e psicopatia) — podem ser entendidas como determinadas configurações dos cinco grandes fatores, fechando o curso com as ferramentas para que o aluno interprete, por conta própria, qualquer perfil de personalidade.",
     ],
   },
-]
+];
 
 // ─── Meta Pixel (scaffold) ───────────────────────────────────────────────────
 // Não faz nada enquanto COURSE.metaPixelId estiver vazio.
 declare global {
-  interface Window { fbq?: (...args: unknown[]) => void; _fbq?: unknown }
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+    _fbq?: unknown;
+  }
 }
 
 function useMetaPixel(pixelId: string) {
   useEffect(() => {
-    if (!pixelId || typeof window === 'undefined' || window.fbq) return
+    if (!pixelId || typeof window === "undefined" || window.fbq) return;
     const fbq: any = function (...args: unknown[]) {
-      fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args)
-    }
-    fbq.push = fbq
-    fbq.loaded = true
-    fbq.version = '2.0'
-    fbq.queue = []
-    window.fbq = fbq
-    window._fbq = fbq
-    const s = document.createElement('script')
-    s.async = true
-    s.src = 'https://connect.facebook.net/en_US/fbevents.js'
-    document.head.appendChild(s)
-    fbq('init', pixelId)
-    fbq('track', 'PageView')
-  }, [pixelId])
+      fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args);
+    };
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = "2.0";
+    fbq.queue = [];
+    window.fbq = fbq;
+    window._fbq = fbq;
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(s);
+    fbq("init", pixelId);
+    fbq("track", "PageView");
+  }, [pixelId]);
 }
 
 function trackInitiateCheckout() {
-  window.fbq?.('track', 'InitiateCheckout')
+  window.fbq?.("track", "InitiateCheckout");
 }
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -999,34 +942,22 @@ function trackInitiateCheckout() {
 
 const TESTIMONIAL_IMAGES = [
   {
-    src: '/depoimento-novo-1.jpeg',
-    alt: 'Print de depoimento de alunas no WhatsApp sobre a aula',
+    src: "/depoimento-novo-1.jpeg",
+    alt: "Print de depoimento de alunas no WhatsApp sobre a aula",
   },
   {
-    src: '/depoimento-novo-2.jpeg',
-    alt: 'Print de depoimento de alunas no WhatsApp agradecendo pelo aprendizado',
+    src: "/depoimento-novo-2.jpeg",
+    alt: "Print de depoimento de alunas no WhatsApp agradecendo pelo aprendizado",
   },
   {
-    src: '/depoimento-novo-3.jpeg',
-    alt: 'Print de depoimento de aluna no WhatsApp sobre o curso de neurociências',
+    src: "/depoimento-novo-3.jpeg",
+    alt: "Print de depoimento de aluna no WhatsApp sobre o curso de neurociências",
   },
   {
-    src: '/depoimento-novo-4.jpeg',
-    alt: 'Print de depoimento de aluna no WhatsApp sobre didática e qualidade do encontro',
+    src: "/depoimento-novo-4.jpeg",
+    alt: "Print de depoimento de aluna no WhatsApp sobre didática e qualidade do encontro",
   },
-  {
-    src: '/depoimento-novo-5.jpeg',
-    alt: 'Print de depoimento de aluna no WhatsApp sobre didática e inscrição',
-  },
-  {
-    src: '/depoimento-novo-6.jpeg',
-    alt: 'Print de depoimento de aluna no WhatsApp sobre bibliografia e aproveitamento da aula',
-  },
-  {
-    src: '/depoimento-novo-7.jpeg',
-    alt: 'Print ampliado de depoimento de aluna no WhatsApp sobre a aula',
-  }
-]
+];
 
 // ─── Tiny sub-components ─────────────────────────────────────────────────────
 
@@ -1035,29 +966,27 @@ function Divider() {
     <div className="eb-container eb-container-6xl">
       <div className="eb-divider" />
     </div>
-  )
+  );
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <span className="eb-eyebrow">{children}</span>
+  return <span className="eb-eyebrow">{children}</span>;
 }
 
 function signupHref() {
-  return COURSE.checkoutUrl === '#' ? '#inscricao' : COURSE.checkoutUrl
+  return COURSE.checkoutUrl === "#" ? "#inscricao" : COURSE.checkoutUrl;
 }
 
 function signupTargetProps() {
-  return COURSE.checkoutUrl === '#'
-    ? {}
-    : { target: '_blank', rel: 'noopener' }
+  return COURSE.checkoutUrl === "#" ? {} : { target: "_blank", rel: "noopener" };
 }
 
 function SignupLink({
   children,
-  className = 'eb-btn eb-btn-primary',
+  className = "eb-btn eb-btn-primary",
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <a
@@ -1068,55 +997,34 @@ function SignupLink({
     >
       {children}
     </a>
-  )
+  );
 }
 
 function PaymentLink({
   children,
-  className = 'eb-btn eb-btn-primary',
+  className = "eb-btn eb-btn-primary",
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <a href="/pagamento" className={className} onClick={trackInitiateCheckout}>
       {children}
     </a>
-  )
+  );
 }
 
-// ─── Testimonials (with seamless marquee loop) ───────────────────────────────
+// ─── Testimonials ────────────────────────────────────────────────────────────
 
 function Testimonials() {
-  const trackRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const originals = Array.from(track.querySelectorAll('.eb-testimonial'))
-    // Clone for seamless loop
-    originals.forEach(orig => {
-      const clone = orig.cloneNode(true) as HTMLElement
-      clone.setAttribute('aria-hidden', 'true')
-      track.appendChild(clone)
-    })
-  }, [])
-
   return (
     <section className="eb-testimonials-section">
       <div className="eb-container eb-container-6xl">
         <div className="eb-section-head">
           <Eyebrow>Quem já estudou</Eyebrow>
-          <h2 style={{ marginTop: '1.5rem' }}>Depoimentos de alunos</h2>
+          <h2 style={{ marginTop: "1.5rem" }}>Depoimentos de alunos</h2>
         </div>
-      </div>
-      <div className="eb-testimonials-viewport">
-        <div className="eb-testimonials-bg" aria-hidden>
-          <div className="eb-blob eb-blob-1" />
-          <div className="eb-blob eb-blob-2" />
-          <div className="eb-blob eb-blob-3" />
-        </div>
-        <div className="eb-testimonials-track" ref={trackRef}>
+        <div className="eb-testimonials-grid">
           {TESTIMONIAL_IMAGES.map((item, i) => (
             <figure key={i} className="eb-testimonial">
               <img className="eb-testimonial-image" src={item.src} alt={item.alt} loading="lazy" />
@@ -1125,46 +1033,46 @@ function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── FAQ (accordion-ready; currently static) ─────────────────────────────────
 
 const FAQ_ITEMS = [
   {
-    q: 'Para quem é este curso?',
-    a: 'Para estudantes e profissionais que querem compreender a personalidade a partir de psicologia, genética comportamental e neurociência — sem depender de explicações rasas ou modelos pop.',
+    q: "Para quem é este curso?",
+    a: "Para estudantes e profissionais que querem compreender a personalidade a partir de psicologia, genética comportamental e neurociência — sem depender de explicações rasas ou modelos pop.",
   },
   {
-    q: 'Preciso ter formação prévia em psicologia?',
-    a: 'Não. O curso parte dos fundamentos, mas mantém densidade suficiente para quem já estuda ou trabalha na área. O conteúdo foi construído para funcionar nos dois casos.',
+    q: "Preciso ter formação prévia em psicologia?",
+    a: "Não. O curso parte dos fundamentos, mas mantém densidade suficiente para quem já estuda ou trabalha na área. O conteúdo foi construído para funcionar nos dois casos.",
   },
   {
-    q: 'As aulas ficam gravadas?',
-    a: 'Sim. Você terá acesso às gravações após cada encontro, para rever com calma ou acompanhar caso não possa estar ao vivo.',
+    q: "As aulas ficam gravadas?",
+    a: "Sim. Você terá acesso às gravações após cada encontro, para rever com calma ou acompanhar caso não possa estar ao vivo.",
   },
   {
-    q: 'Há material de apoio?',
-    a: 'Sim. Cada aula acompanha material escrito de revisão — organizado para facilitar a retomada dos conceitos sem depender só da memória.',
+    q: "Há material de apoio?",
+    a: "Sim. Cada aula acompanha material escrito de revisão — organizado para facilitar a retomada dos conceitos sem depender só da memória.",
   },
   {
-    q: 'O curso oferece certificado?',
-    a: 'Sim. O certificado de participação é enviado por e-mail após a conclusão do curso.',
+    q: "O curso oferece certificado?",
+    a: "Sim. O certificado de participação é enviado por e-mail após a conclusão do curso.",
   },
   {
-    q: 'Como funciona o pagamento?',
-    a: 'A inscrição pode ser paga por cartão de crédito, boleto ou PIX com desconto falando diretamente pelo WhatsApp.',
+    q: "Como funciona o pagamento?",
+    a: "A inscrição pode ser paga por cartão de crédito ou boleto direto no site. Para pagar via PIX com desconto, fale diretamente pelo WhatsApp.",
   },
   {
-    q: 'As aulas são ao vivo — como acesso?',
-    a: 'Pelo Google Meet. O link é enviado por e-mail após a confirmação do pagamento.',
+    q: "As aulas são ao vivo — como acesso?",
+    a: "Pelo Google Meet. O link é enviado por e-mail após a confirmação do pagamento.",
   },
-]
+];
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function LandingPage() {
-  useMetaPixel(COURSE.metaPixelId)
+  useMetaPixel(COURSE.metaPixelId);
 
   return (
     <>
@@ -1172,12 +1080,13 @@ export default function LandingPage() {
       <style dangerouslySetInnerHTML={{ __html: BRAND_STYLES }} />
 
       <div className="eb-lp">
-
         {/* ── TOP BAR ─────────────────────────────────────────────────────── */}
         <header className="eb-topbar">
           <div className="eb-container eb-container-6xl">
             <div className="eb-topbar-inner">
-              <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
+              <div className="eb-wordmark">
+                Vicente <em>Cotanda</em>
+              </div>
               <div className="eb-topbar-meta" aria-label="Resumo da turma">
                 <span>{COURSE.meetings}</span>
                 <SignupLink className="eb-btn eb-btn-primary eb-btn-small">Inscrever</SignupLink>
@@ -1192,16 +1101,24 @@ export default function LandingPage() {
             <div className="eb-hero-grid">
               <div>
                 <h1>Personalidade</h1>
-                <p className="eb-hero-subtitle">
-                  Desenvolvimento, Big Five e Psicopatologia
-                </p>
+                <p className="eb-hero-subtitle">Desenvolvimento, Big Five e Psicopatologia</p>
                 <p className="eb-hero-professor">com Prof. Me. Vicente Cotanda</p>
                 <div className="eb-hero-meta">
-                  <span><strong>Ministrado por Prof. Me. Vicente Cotanda</strong></span>
-                  <span className="eb-dot" aria-hidden>·</span>
-                  <span><strong>{COURSE.datesLabel}</strong></span>
-                  <span className="eb-dot" aria-hidden>·</span>
-                  <span><strong>{COURSE.spotsLabel}</strong></span>
+                  <span>
+                    <strong>Ministrado por Prof. Me. Vicente Cotanda</strong>
+                  </span>
+                  <span className="eb-dot" aria-hidden>
+                    ·
+                  </span>
+                  <span>
+                    <strong>{COURSE.datesLabel}</strong>
+                  </span>
+                  <span className="eb-dot" aria-hidden>
+                    ·
+                  </span>
+                  <span>
+                    <strong>{COURSE.spotsLabel}</strong>
+                  </span>
                 </div>
                 <div className="eb-hero-actions">
                   <SignupLink>Quero entrar na turma</SignupLink>
@@ -1211,7 +1128,6 @@ export default function LandingPage() {
                   <span className="eb-hero-note">Aulas ao vivo, gravações e certificado.</span>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -1221,8 +1137,8 @@ export default function LandingPage() {
           <div className="eb-container eb-container-6xl">
             <div className="eb-section-head">
               <Eyebrow>Programação</Eyebrow>
-              <h2 style={{ marginTop: '1.5rem' }}>A programação das aulas</h2>
-              <p className="eb-lede" style={{ margin: '1rem auto 0' }}>
+              <h2 style={{ marginTop: "1.5rem" }}>A programação das aulas</h2>
+              <p className="eb-lede" style={{ margin: "1rem auto 0" }}>
                 19h45 às 21h00 · via Google Meet
               </p>
             </div>
@@ -1268,11 +1184,12 @@ export default function LandingPage() {
                   <span className="eb-professor-badge">Palestrante</span>
                 </div>
                 <p className="eb-professor-copy">
-                  Mestre em filosofia com a dissertação <em>"An Interdisciplinary Analysis of
-                  Behavioral Genetics"</em>, aprovada com louvor. Bolsista CAPES-PDSE,
-                  pesquisador do Instituto do Cérebro do Rio Grande do Sul em colaboração
-                  com o Nathan Kline Institute, em New York, e palestrante nas áreas de
-                  genética comportamental, neuroimagem e interdisciplinaridade na psicologia.
+                  Mestre em filosofia com a dissertação{" "}
+                  <em>"An Interdisciplinary Analysis of Behavioral Genetics"</em>, aprovada com
+                  louvor. Bolsista CAPES-PDSE, pesquisador do Instituto do Cérebro do Rio Grande do
+                  Sul em colaboração com o Nathan Kline Institute, em New York, e palestrante nas
+                  áreas de genética comportamental, neuroimagem e interdisciplinaridade na
+                  psicologia.
                 </p>
                 <div className="eb-professor-stat">
                   200+
@@ -1307,16 +1224,26 @@ export default function LandingPage() {
                     <li>Descontos em eventos futuros</li>
                   </ul>
                   <div className="eb-price-meta">
-                    <span>Datas: <strong>{COURSE.datesLabel}</strong></span>
-                    <span>Horário: <strong>19h45 às 21h00</strong></span>
-                    <span>Plataforma: <strong>Google Meet</strong></span>
-                    <span>Vagas: <strong>{COURSE.spotsLabel}</strong></span>
+                    <span>
+                      Datas: <strong>{COURSE.datesLabel}</strong>
+                    </span>
+                    <span>
+                      Horário: <strong>19h45 às 21h00</strong>
+                    </span>
+                    <span>
+                      Plataforma: <strong>Google Meet</strong>
+                    </span>
+                    <span>
+                      Vagas: <strong>turma reduzida</strong>
+                    </span>
                   </div>
                 </div>
                 <div>
                   <div className="eb-offer-panel">
-                    <span className="eb-lot-badge">1º lote</span>
-                    <p className="eb-old-price"><s>De R$ 1.299,00</s> 2º lote</p>
+                    <span className="eb-lot-badge">1º LOTE</span>
+                    <p className="eb-old-price">
+                      De <s>R$ 1.299,00</s> por
+                    </p>
                     <div className="eb-lot-price">
                       <strong>R$ 979,00</strong>
                       <em>no Pix, à vista</em>
@@ -1330,12 +1257,15 @@ export default function LandingPage() {
                     <strong>Indique e ganhe</strong>
                     <p>Traga um(a) colega que se inscreva e receba R$ 150 de volta.</p>
                   </div>
-                  <PaymentLink className="eb-btn eb-btn-primary eb-btn-wide">Inscrever-se</PaymentLink>
-                  <p className="eb-price-includes" style={{ marginTop: '1rem', marginBottom: 0 }}>
+                  <PaymentLink className="eb-btn eb-btn-primary eb-btn-wide">
+                    Inscrever-se
+                  </PaymentLink>
+                  <p className="eb-price-includes" style={{ marginTop: "1rem", marginBottom: 0 }}>
                     {COURSE.registrationMessage}
                   </p>
                   <p className="eb-guarantee">
-                    Garantia incondicional de 7 dias — pagamento processado via Mercado Pago.<br />
+                    Garantia incondicional de 7 dias — pagamento processado via Mercado Pago.
+                    <br />
                     Se não for para você, devolvemos integralmente.
                   </p>
                 </div>
@@ -1381,7 +1311,11 @@ export default function LandingPage() {
             <div className="eb-faq-grid">
               <div>
                 <div className="eb-bio-label">Perguntas</div>
-                <h2>Antes de<br />se inscrever.</h2>
+                <h2>
+                  Antes de
+                  <br />
+                  se inscrever.
+                </h2>
               </div>
               <dl>
                 {FAQ_ITEMS.map((item, i) => (
@@ -1402,7 +1336,8 @@ export default function LandingPage() {
           <div className="eb-container eb-container-3xl">
             <p className="eb-final-cta-eyebrow">Próxima turma confirmada:</p>
             <h2>
-              Aulas em<br />
+              Aulas em
+              <br />
               <em>{COURSE.datesLabel}.</em>
             </h2>
             <SignupLink>Quero entrar na turma</SignupLink>
@@ -1414,7 +1349,9 @@ export default function LandingPage() {
         <footer className="eb-footer">
           <div className="eb-container eb-container-6xl">
             <div className="eb-footer-inner">
-              <div className="eb-wordmark">Vicente <em>Cotanda</em></div>
+              <div className="eb-wordmark">
+                Vicente <em>Cotanda</em>
+              </div>
               <div className="eb-footer-contact" aria-label="Contato">
                 <a href="mailto:vdcotanda@gmail.com">vdcotanda@gmail.com</a>
                 <a href="tel:+5551993545506">+55 51 99354-5506</a>
@@ -1423,8 +1360,7 @@ export default function LandingPage() {
             </div>
           </div>
         </footer>
-
       </div>
     </>
-  )
+  );
 }

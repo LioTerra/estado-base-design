@@ -59,10 +59,17 @@ function PagamentoPage() {
             </p>
           </header>
 
-          <section className="mx-auto mt-10 max-w-3xl border-y border-border py-7 text-center">
-            <p className="font-serif text-[clamp(44px,8vw,68px)] leading-none">R$ 979,00</p>
-            <p className="mt-3 text-sm text-muted-foreground md:text-base">
-              à vista no PIX ou boleto · até 9x sem juros no cartão
+          <section className="mx-auto mt-10 max-w-3xl bg-[#7A1E1E] px-6 py-7 text-center text-[#F7F3EE] md:px-10">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#C9963A]">
+              1º LOTE
+            </span>
+            <p className="mt-4 text-sm text-[#F7F3EE]/60">
+              De <s>R$ 1.299,00</s> por
+            </p>
+            <p className="mt-2 font-serif text-[clamp(44px,8vw,68px)] leading-none">R$ 979,00</p>
+            <p className="mt-3 text-sm text-[#F7F3EE]/80">no Pix, à vista</p>
+            <p className="mt-4 text-sm text-[#F7F3EE]/90 md:text-base">
+              ou em até <strong>9x sem juros</strong> no cartão. Condições de primeiro lote.
             </p>
           </section>
 
